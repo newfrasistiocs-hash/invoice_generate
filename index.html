@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Luxury Invoice Generator</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
     :root{
       --bg1:#080808;
@@ -14,6 +15,7 @@
       --paper:#ffffff;
       --ink:#1c1c1c;
       --muted:#6d6d6d;
+      --danger:#dc3545;
     }
     body{
       margin:0;
@@ -95,6 +97,14 @@
       font-weight:700;
       padding:10px 16px;
     }
+    .btn-info{
+      background:linear-gradient(90deg, #0aa3c2, #056f84);
+      border:none;
+      border-radius:12px;
+      font-weight:700;
+      padding:10px 16px;
+      color:#fff;
+    }
     .btn-danger{ border-radius:10px; }
     .lux-note{
       margin-top:14px;
@@ -145,6 +155,62 @@
     }
     .menu-panel.show{ display:block; }
     .free-disabled { pointer-events:none; opacity:.55; }
+
+    .form-control.is-invalid{
+      border-color:var(--danger)!important;
+      box-shadow:0 0 0 .2rem rgba(220,53,69,.15)!important;
+      background-color:#fff5f5;
+    }
+    .invalid-feedback{
+      display:none;
+      color:var(--danger);
+      font-size:.875rem;
+      margin-top:6px;
+    }
+    .form-control.is-invalid ~ .invalid-feedback{ display:block; }
+
+    .shake{ animation:shake .45s ease-in-out; }
+    @keyframes shake{
+      0%{transform:translateX(0)}
+      20%{transform:translateX(-6px)}
+      40%{transform:translateX(6px)}
+      60%{transform:translateX(-5px)}
+      80%{transform:translateX(5px)}
+      100%{transform:translateX(0)}
+    }
+
+    .item-row-error{ background:rgba(220,53,69,.05); }
+    .item-row-error input{ border-color:var(--danger)!important; }
+
+    .loading-btn{ pointer-events:none; opacity:.88; }
+    .loading-spinner{
+      display:inline-block;
+      width:1rem;
+      height:1rem;
+      margin-right:8px;
+      border:2px solid rgba(255,255,255,.35);
+      border-top-color:#fff;
+      border-radius:50%;
+      animation:spin .8s linear infinite;
+      vertical-align:-2px;
+    }
+    @keyframes spin{ to{ transform:rotate(360deg); } }
+
+    .send-icon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-right:8px;
+      transition:transform .3s ease, opacity .3s ease;
+    }
+    .loading-btn .send-icon{ animation:planeSpin .9s linear infinite; }
+    @keyframes planeSpin{
+      0%{transform:rotate(0deg)}
+      50%{transform:rotate(15deg)}
+      100%{transform:rotate(360deg)}
+    }
+
+    .field-hint{ font-size:12px; color:#8c8c8c; margin-top:5px; }
   </style>
 </head>
 <body>
@@ -191,21 +257,24 @@
             </div>
           </div>
 
-          <form id="invoiceForm">
+          <form id="invoiceForm" novalidate>
             <div class="row g-3 mb-3">
               <div class="col-md-6">
                 <label class="form-label" id="lblCompanyName">Nama Perusahaan / Agency</label>
                 <input type="text" class="form-control" id="companyName" value="Nama Agency Anda">
+                <div class="invalid-feedback" id="companyNameError">Nama perusahaan wajib diisi.</div>
               </div>
               <div class="col-md-6 premium-only" id="logoWrap">
                 <label class="form-label" id="lblLogo">Logo Perusahaan</label>
                 <input type="file" class="form-control" id="logo" accept="image/*">
+                <div class="field-hint" id="logoHint">Logo akan dipakai pada header dan watermark.</div>
               </div>
             </div>
 
             <div class="mb-3">
               <label class="form-label" id="lblAddress">Alamat Perusahaan</label>
               <textarea class="form-control" id="companyAddress" rows="2" placeholder="Jl. Contoh No. 123, Kota, Negara"></textarea>
+              <div class="invalid-feedback" id="companyAddressError">Alamat perusahaan wajib diisi.</div>
             </div>
 
             <div class="row g-3 mb-3">
@@ -216,26 +285,31 @@
               <div class="col-md-4">
                 <label class="form-label" id="lblDate">Tanggal</label>
                 <input type="date" class="form-control" id="date">
+                <div class="invalid-feedback" id="dateError">Tanggal wajib diisi.</div>
               </div>
               <div class="col-md-4">
                 <label class="form-label" id="lblDueDate">Jatuh Tempo</label>
                 <input type="date" class="form-control" id="dueDate">
+                <div class="invalid-feedback" id="dueDateError">Jatuh tempo wajib diisi.</div>
               </div>
             </div>
 
             <div class="mb-3">
               <label class="form-label" id="lblClient">Nama Klien</label>
               <input type="text" class="form-control" id="clientName" placeholder="Masukkan nama klien">
+              <div class="invalid-feedback" id="clientNameError">Nama klien wajib diisi.</div>
             </div>
 
             <div class="row g-3 mb-3">
               <div class="col-md-6">
                 <label class="form-label" id="lblBank">Nama Bank</label>
                 <input type="text" class="form-control" id="bankName" placeholder="BCA / Mandiri / BNI">
+                <div class="invalid-feedback" id="bankNameError">Nama bank wajib diisi.</div>
               </div>
               <div class="col-md-6">
                 <label class="form-label" id="lblAcc">Nomor Rekening</label>
                 <input type="text" class="form-control" id="accountNumber" placeholder="1234567890">
+                <div class="invalid-feedback" id="accountNumberError">Nomor rekening wajib diisi.</div>
               </div>
             </div>
 
@@ -243,10 +317,25 @@
               <div class="col-md-6 premium-only" id="qrNoteWrap">
                 <label class="form-label" id="lblPayNote">Keterangan Pembayaran / QR Text</label>
                 <input type="text" class="form-control" id="paymentNote" placeholder="Scan QR untuk pembayaran">
+                <div class="invalid-feedback" id="paymentNoteError">Keterangan pembayaran wajib diisi.</div>
               </div>
               <div class="col-md-6">
                 <label class="form-label" id="lblIssuer">Nama Pembuat Invoice / TTD</label>
                 <input type="text" class="form-control" id="issuerName" placeholder="Nama Anda">
+                <div class="invalid-feedback" id="issuerNameError">Nama pembuat invoice wajib diisi.</div>
+              </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label class="form-label" id="lblEmail">Email Penerima</label>
+                <input type="email" class="form-control" id="recipientEmail" placeholder="client@email.com">
+                <div class="invalid-feedback" id="recipientEmailError">Email penerima tidak valid.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" id="lblWhatsApp">Nomor WhatsApp</label>
+                <input type="text" class="form-control" id="whatsAppNumber" placeholder="62812xxxxxxx">
+                <div class="invalid-feedback" id="whatsAppNumberError">Nomor WhatsApp tidak valid.</div>
               </div>
             </div>
 
@@ -278,7 +367,15 @@
 
             <div class="d-flex flex-wrap gap-2 mt-3">
               <button type="button" class="btn btn-success" onclick="addRow()" id="btnAdd">Tambah Item</button>
-              <button type="button" class="btn btn-primary" onclick="generatePDF()" id="btnGenerate">Download Invoice PDF</button>
+              <button type="button" class="btn btn-primary" id="btnDownload" onclick="generatePDF()">Download Invoice PDF</button>
+              <button type="button" class="btn btn-info" id="btnEmail" onclick="sendInvoiceEmail()">
+                <span class="send-icon"><i class="bi bi-send-fill"></i></span>
+                <span id="btnEmailText">Kirim Email</span>
+              </button>
+              <button type="button" class="btn btn-success" id="btnWa" onclick="shareWhatsAppInvoice()">
+                <i class="bi bi-whatsapp me-1"></i>
+                <span id="btnWaText">Kirim WhatsApp</span>
+              </button>
             </div>
 
             <div class="lux-note" id="noteBox">Gunakan logo transparan dan alamat singkat agar hasil PDF terlihat seperti invoice korporat sungguhan.</div>
@@ -301,60 +398,157 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
     let currentLang='id', currentMode='luxury';
-    const t={id:{title:'Luxury Invoice Generator',subtitle:'Versi paling premium tanpa autoTable',panelTitle:'Luxury Billing System',panelSub:'Header dua kolom, layout manual, dan tampilan corporate premium.',modeLabel:'Pilih Mode',modeDesc:'Free tidak mendukung logo dan QR pembayaran.',companyName:'Nama Perusahaan / Agency',logo:'Logo Perusahaan',address:'Alamat Perusahaan',invoiceNo:'Invoice #',date:'Tanggal',dueDate:'Jatuh Tempo',client:'Nama Klien',bank:'Nama Bank',acc:'Nomor Rekening',payNote:'Keterangan Pembayaran / QR Text',issuer:'Nama Pembuat Invoice / TTD',items:'Daftar Item',desc:'Deskripsi',qty:'Qty',price:'Harga',tax:'Pajak (%)',action:'Aksi',remove:'Hapus',add:'Tambah Item',generate:'Download Invoice PDF',note:'Gunakan logo transparan dan alamat singkat agar hasil PDF terlihat seperti invoice korporat sungguhan.',upgradeTitle:'Upgrade Premium',upgradeDesc:'Aktifkan logo, QR pembayaran, dan tampilan invoice lengkap.',langBtn:'Bahasa',free:'Free',premium:'Premium',luxury:'Luxury'},en:{title:'Luxury Invoice Generator',subtitle:'The most premium version without autoTable',panelTitle:'Luxury Billing System',panelSub:'Two-column header, manual layout, and premium corporate styling.',modeLabel:'Choose Mode',modeDesc:'Free mode does not support logo and payment QR.',companyName:'Company / Agency Name',logo:'Company Logo',address:'Company Address',invoiceNo:'Invoice #',date:'Date',dueDate:'Due Date',client:'Client Name',bank:'Bank Name',acc:'Account Number',payNote:'Payment Note / QR Text',issuer:'Issuer Name / Signature',items:'Items',desc:'Description',qty:'Qty',price:'Price',tax:'Tax (%)',action:'Action',remove:'Remove',add:'Add Item',generate:'Download Invoice PDF',note:'Use a transparent logo and short address to keep the PDF looking corporate.',upgradeTitle:'Upgrade Premium',upgradeDesc:'Enable logo, payment QR, and full invoice styling.',langBtn:'Language',free:'Free',premium:'Premium',luxury:'Luxury'}};
+    const EMAILJS_SERVICE_ID='YOUR_SERVICE_ID';
+    const EMAILJS_TEMPLATE_ID='YOUR_TEMPLATE_ID';
+    const EMAILJS_PUBLIC_KEY='YOUR_PUBLIC_KEY';
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    const t={id:{title:'Luxury Invoice Generator',subtitle:'Versi paling premium tanpa autoTable',panelTitle:'Luxury Billing System',panelSub:'Header dua kolom, layout manual, dan tampilan corporate premium.',modeLabel:'Pilih Mode',modeDesc:'Free tidak mendukung logo dan QR pembayaran.',companyName:'Nama Perusahaan / Agency',logo:'Logo Perusahaan',address:'Alamat Perusahaan',invoiceNo:'Invoice #',date:'Tanggal',dueDate:'Jatuh Tempo',client:'Nama Klien',bank:'Nama Bank',acc:'Nomor Rekening',payNote:'Keterangan Pembayaran / QR Text',issuer:'Nama Pembuat Invoice / TTD',email:'Email Penerima',whatsApp:'Nomor WhatsApp',items:'Daftar Item',desc:'Deskripsi',qty:'Qty',price:'Harga',tax:'Pajak (%)',action:'Aksi',remove:'Hapus',add:'Tambah Item',generate:'Download Invoice PDF',emailBtn:'Kirim Email',waBtn:'Kirim WhatsApp',note:'Gunakan logo transparan dan alamat singkat agar hasil PDF terlihat seperti invoice korporat sungguhan.',upgradeTitle:'Upgrade Premium',upgradeDesc:'Aktifkan logo, QR pembayaran, dan tampilan invoice lengkap.',langBtn:'Bahasa',free:'Free',premium:'Premium',luxury:'Luxury'},
+    en:{title:'Luxury Invoice Generator',subtitle:'The most premium version without autoTable',panelTitle:'Luxury Billing System',panelSub:'Two-column header, manual layout, and premium corporate styling.',modeLabel:'Choose Mode',modeDesc:'Free mode does not support logo and payment QR.',companyName:'Company / Agency Name',logo:'Company Logo',address:'Company Address',invoiceNo:'Invoice #',date:'Date',dueDate:'Due Date',client:'Client Name',bank:'Bank Name',acc:'Account Number',payNote:'Payment Note / QR Text',issuer:'Issuer Name / Signature',email:'Recipient Email',whatsApp:'WhatsApp Number',items:'Items',desc:'Description',qty:'Qty',price:'Price',tax:'Tax (%)',action:'Action',remove:'Remove',add:'Add Item',generate:'Download Invoice PDF',emailBtn:'Send Email',waBtn:'Send WhatsApp',note:'Use a transparent logo and short address to keep the PDF looking corporate.',upgradeTitle:'Upgrade Premium',upgradeDesc:'Enable logo, payment QR, and full invoice styling.',langBtn:'Language',free:'Free',premium:'Premium',luxury:'Luxury'}};
 
     function toggleMenu(){document.getElementById('menuPanel').classList.toggle('show')}
-    function applyTexts(){const x=t[currentLang];Object.entries({uiTitle:x.title,uiSubtitle:x.subtitle,uiPanelTitle:x.panelTitle,uiPanelSub:x.panelSub,modeLabel:x.modeLabel,modeDesc:x.modeDesc,lblCompanyName:x.companyName,lblLogo:x.logo,lblAddress:x.address,lblInvoiceNo:x.invoiceNo,lblDate:x.date,lblDueDate:x.dueDate,lblClient:x.client,lblBank:x.bank,lblAcc:x.acc,lblPayNote:x.payNote,lblIssuer:x.issuer,lblItems:x.items,thDesc:x.desc,thQty:x.qty,thPrice:x.price,thTax:x.tax,thAction:x.action,btnRemove:x.remove,btnAdd:x.add,btnGenerate:x.generate,noteBox:x.note,upgradeTitle:x.upgradeTitle,upgradeDesc:x.upgradeDesc,langBtn:x.langBtn,freeModeBtn:x.free,premiumModeBtn:x.premium,luxuryModeBtn:x.luxury}).forEach(([k,v])=>document.getElementById(k).innerText=v);document.documentElement.lang=currentLang}
+    function applyTexts(){
+      const x=t[currentLang];
+      Object.entries({uiTitle:x.title,uiSubtitle:x.subtitle,uiPanelTitle:x.panelTitle,uiPanelSub:x.panelSub,modeLabel:x.modeLabel,modeDesc:x.modeDesc,lblCompanyName:x.companyName,lblLogo:x.logo,lblAddress:x.address,lblInvoiceNo:x.invoiceNo,lblDate:x.date,lblDueDate:x.dueDate,lblClient:x.client,lblBank:x.bank,lblAcc:x.acc,lblPayNote:x.payNote,lblIssuer:x.issuer,lblEmail:x.email,lblWhatsApp:x.whatsApp,lblItems:x.items,thDesc:x.desc,thQty:x.qty,thPrice:x.price,thTax:x.tax,thAction:x.action,btnRemove:x.remove,btnAdd:x.add,btnDownload:x.generate,btnEmailText:x.emailBtn,btnWaText:x.waBtn,noteBox:x.note,upgradeTitle:x.upgradeTitle,upgradeDesc:x.upgradeDesc,langBtn:x.langBtn,freeModeBtn:x.free,premiumModeBtn:x.premium,luxuryModeBtn:x.luxury}).forEach(([k,v])=>document.getElementById(k).innerText=v);
+      document.documentElement.lang=currentLang;
+      document.getElementById('companyAddress').placeholder=currentLang==='id'?'Jl. Contoh No. 123, Kota, Negara':'Street, Number, City, Country';
+      document.getElementById('clientName').placeholder=currentLang==='id'?'Masukkan nama klien':'Enter client name';
+      document.getElementById('bankName').placeholder=currentLang==='id'?'BCA / Mandiri / BNI':'Bank name';
+      document.getElementById('paymentNote').placeholder=currentLang==='id'?'Scan QR untuk pembayaran':'Scan QR for payment';
+      document.getElementById('issuerName').placeholder=currentLang==='id'?'Nama Anda':'Your name';
+      document.getElementById('recipientEmail').placeholder='client@email.com';
+      document.getElementById('whatsAppNumber').placeholder='62812xxxxxxx';
+    }
     function setLanguage(lang){currentLang=lang;applyTexts()}
-    function setMode(mode){currentMode=mode}
-    function addRow(){const tb=document.querySelector('#itemsTable tbody');const r=tb.insertRow();r.innerHTML=`<td><input type="text" class="form-control" placeholder="${currentLang==='id'?'Deskripsi':'Description'}"></td><td><input type="number" class="form-control" value="1" min="0"></td><td><input type="number" class="form-control" value="0" min="0"></td><td><input type="number" class="form-control" value="0" min="0"></td><td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">${t[currentLang].remove}</button></td>`}
+    function setMode(mode){
+      currentMode=mode;
+      document.getElementById('freeModeBtn').classList.toggle('active', mode==='free');
+      document.getElementById('premiumModeBtn').classList.toggle('active', mode==='premium');
+      document.getElementById('luxuryModeBtn').classList.toggle('active', mode==='luxury');
+      const logoWrap=document.getElementById('logoWrap'), qrWrap=document.getElementById('qrNoteWrap');
+      if(mode==='free'){ logoWrap.classList.add('free-disabled'); qrWrap.classList.add('free-disabled'); }
+      else { logoWrap.classList.remove('free-disabled'); qrWrap.classList.remove('free-disabled'); }
+    }
+    function addRow(){
+      const tb=document.querySelector('#itemsTable tbody'); const r=tb.insertRow();
+      r.innerHTML=`<td><input type="text" class="form-control" placeholder="${currentLang==='id'?'Deskripsi':'Description'}"></td><td><input type="number" class="form-control" value="1" min="0"></td><td><input type="number" class="form-control" value="0" min="0"></td><td><input type="number" class="form-control" value="0" min="0"></td><td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">${t[currentLang].remove}</button></td>`;
+    }
     function removeRow(btn){const row=btn.closest('tr');if(document.querySelectorAll('#itemsTable tbody tr').length>1)row.remove();else alert(currentLang==='id'?'Minimal harus ada 1 item.':'At least 1 item is required.')}
     async function fileToDataURL(file){return new Promise((res,rej)=>{if(!file)return res(null);const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
     function fmtDate(s){if(!s)return'-';return new Date(s+'T00:00:00').toLocaleDateString(currentLang==='id'?'id-ID':'en-US',{year:'numeric',month:'long',day:'numeric'})}
     function makeQRDataURL(text){const d=document.createElement('div');d.style.position='fixed';d.style.left='-9999px';document.body.appendChild(d);new QRCode(d,{text,width:120,height:120,colorDark:"#111",colorLight:"#fff",correctLevel:QRCode.CorrectLevel.H});const i=d.querySelector('img'),c=d.querySelector('canvas');const out=i&&i.src?i.src:(c?c.toDataURL("image/png"):null);document.body.removeChild(d);return out}
     function money(v){return new Intl.NumberFormat(currentLang==='id'?'id-ID':'en-US',{style:'currency',currency:'USD'}).format(v)}
     function drawLine(doc,x1,y1,x2,y2,c=[220,210,190]){doc.setDrawColor(...c);doc.line(x1,y1,x2,y2)}
+    function getAutoInvoiceNumber(){const key='lux_invoice_counter';let n=parseInt(localStorage.getItem(key)||'1000',10)+1;localStorage.setItem(key,String(n));const year=new Date().getFullYear();return `INV/${year}/${String(n).padStart(4,'0')}`}
+    function triggerShake(el){if(!el)return;el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');el.addEventListener('animationend',()=>el.classList.remove('shake'),{once:true})}
+    function setFieldState(id,isValid,message=''){const el=document.getElementById(id),err=document.getElementById(id+'Error');if(!el)return;el.classList.toggle('is-invalid',!isValid);if(err)err.textContent=message;if(!isValid)triggerShake(el)}
+    function clearAllFieldStates(){['companyName','companyAddress','clientName','recipientEmail','whatsAppNumber','bankName','accountNumber','paymentNote','issuerName','date','dueDate'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('is-invalid','shake')});document.querySelectorAll('#itemsTable tbody tr').forEach(r=>r.classList.remove('item-row-error'))}
+    function validateEmail(email){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase())}
+    function normalizePhone(phone){return phone.replace(/[^\d]/g,'')}
+    function validatePhone(phone){const p=normalizePhone(phone);return p.length>=10&&p.length<=15}
 
-    function getAutoInvoiceNumber(){
-      const key='lux_invoice_counter';
-      let n=parseInt(localStorage.getItem(key)||'1000',10)+1;
-      localStorage.setItem(key,String(n));
-      return 'INV-' + String(n).padStart(4,'0');
+    function validateInvoiceForm({needEmail=false,needWhatsApp=false}={}){
+      clearAllFieldStates();
+      const companyName=document.getElementById('companyName').value.trim();
+      const companyAddress=document.getElementById('companyAddress').value.trim();
+      const clientName=document.getElementById('clientName').value.trim();
+      const recipientEmail=document.getElementById('recipientEmail').value.trim();
+      const whatsAppNumber=document.getElementById('whatsAppNumber').value.trim();
+      const bankName=document.getElementById('bankName').value.trim();
+      const accountNumber=document.getElementById('accountNumber').value.trim();
+      const paymentNote=document.getElementById('paymentNote').value.trim();
+      const issuerName=document.getElementById('issuerName').value.trim();
+      const date=document.getElementById('date').value;
+      const dueDate=document.getElementById('dueDate').value;
+
+      let firstInvalid=null, subtotal=0, taxTotal=0, hasValidItem=false;
+
+      if(!companyName){setFieldState('companyName',false,currentLang==='id'?'Nama perusahaan wajib diisi.':'Company name is required.');firstInvalid ||= document.getElementById('companyName')}
+      if(!companyAddress){setFieldState('companyAddress',false,currentLang==='id'?'Alamat perusahaan wajib diisi.':'Company address is required.');firstInvalid ||= document.getElementById('companyAddress')}
+      if(!clientName){setFieldState('clientName',false,currentLang==='id'?'Nama klien wajib diisi.':'Client name is required.');firstInvalid ||= document.getElementById('clientName')}
+      if(!bankName){setFieldState('bankName',false,currentLang==='id'?'Nama bank wajib diisi.':'Bank name is required.');firstInvalid ||= document.getElementById('bankName')}
+      if(!accountNumber){setFieldState('accountNumber',false,currentLang==='id'?'Nomor rekening wajib diisi.':'Account number is required.');firstInvalid ||= document.getElementById('accountNumber')}
+      if(currentMode!=='free' && !paymentNote){setFieldState('paymentNote',false,currentLang==='id'?'Keterangan pembayaran wajib diisi.':'Payment note is required.');firstInvalid ||= document.getElementById('paymentNote')}
+      if(!issuerName){setFieldState('issuerName',false,currentLang==='id'?'Nama pembuat invoice wajib diisi.':'Issuer name is required.');firstInvalid ||= document.getElementById('issuerName')}
+      if(!date){setFieldState('date',false,currentLang==='id'?'Tanggal wajib diisi.':'Date is required.');firstInvalid ||= document.getElementById('date')}
+      if(!dueDate){setFieldState('dueDate',false,currentLang==='id'?'Jatuh tempo wajib diisi.':'Due date is required.');firstInvalid ||= document.getElementById('dueDate')}
+
+      const rows=document.querySelectorAll('#itemsTable tbody tr');
+      rows.forEach(r=>{
+        const descInput=r.cells[0].querySelector('input'), qtyInput=r.cells[1].querySelector('input'), priceInput=r.cells[2].querySelector('input'), taxInput=r.cells[3].querySelector('input');
+        const desc=descInput.value.trim(), qty=parseFloat(qtyInput.value), price=parseFloat(priceInput.value), tax=parseFloat(taxInput.value);
+        const rowValid=desc&&qty>0&&price>0&&tax>=0;
+        if(rowValid){hasValidItem=true; const st=qty*price; subtotal+=st; taxTotal+=st*(tax/100)}
+        else{r.classList.add('item-row-error'); [descInput,qtyInput,priceInput,taxInput].forEach(el=>{el.classList.add('is-invalid'); triggerShake(el)}); if(!firstInvalid) firstInvalid=descInput}
+      });
+
+      const total=subtotal+taxTotal;
+      if(!hasValidItem){alert(currentLang==='id'?'Isi minimal 1 item yang valid.':'Fill at least 1 valid item.'); return false}
+      if(total<=0){alert(currentLang==='id'?'Total nominal tidak boleh nol.':'Total amount cannot be zero.'); triggerShake(document.getElementById('itemsTable')); return false}
+
+      if(needEmail && (!recipientEmail || !validateEmail(recipientEmail))){setFieldState('recipientEmail',false,currentLang==='id'?'Email penerima tidak valid.':'Recipient email is invalid.');firstInvalid ||= document.getElementById('recipientEmail')}
+      if(needWhatsApp && (!whatsAppNumber || !validatePhone(whatsAppNumber))){setFieldState('whatsAppNumber',false,currentLang==='id'?'Nomor WhatsApp tidak valid.':'WhatsApp number is invalid.');firstInvalid ||= document.getElementById('whatsAppNumber')}
+
+      if(firstInvalid){triggerShake(firstInvalid); firstInvalid.scrollIntoView({behavior:'smooth', block:'center'}); return false}
+      return true
     }
 
-    function drawWatermark(doc, text){
-      const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight();
-      doc.saveGraphicsState();
-      doc.setTextColor(235, 228, 214);
-      doc.setFont('Helvetica','bold');
-      doc.setFontSize(42);
-      doc.text(text, W/2, H/2, { align:'center', angle: 45 });
-      doc.restoreGraphicsState();
+    function setButtonLoading(btnId, loading, loadingText='Memproses...'){
+      const btn=document.getElementById(btnId), text=document.getElementById(btnId+'Text');
+      if(!btn||!text)return;
+      if(loading){btn.dataset.originalText=text.textContent; btn.classList.add('loading-btn'); btn.disabled=true; btn.innerHTML = btnId==='btnEmail' ? `<span class="loading-spinner"></span><span class="send-icon"><i class="bi bi-send-fill"></i></span><span id="${btnId}Text">${loadingText}</span>` : `<span class="loading-spinner"></span><span id="${btnId}Text">${loadingText}</span>`}
+      else{btn.classList.remove('loading-btn'); btn.disabled=false; btn.innerHTML = btnId==='btnEmail' ? `<span class="send-icon"><i class="bi bi-send-fill"></i></span><span id="${btnId}Text">${btn.dataset.originalText||text.textContent}</span>` : `<i class="bi bi-whatsapp me-1"></i><span id="${btnId}Text">${btn.dataset.originalText||text.textContent}</span>`}
     }
 
-    async function generatePDF(){
-      const {jsPDF}=window.jspdf; const doc=new jsPDF('p','mm','a4');
+    function drawWatermarkLogo(doc, logoData){if(!logoData)return; const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight(); try{doc.addImage(logoData,'PNG',W/2-35,H/2-35,70,70,undefined,'FAST',45)}catch(e){}}
+    function drawWatermarkText(doc, text){const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight(); doc.setTextColor(235,228,214); doc.setFont('Helvetica','bold'); doc.setFontSize(42); doc.text(text,W/2,H/2,{align:'center',angle:45})}
+
+    async function buildInvoicePDF(){
+      const {jsPDF}=window.jspdf;
+      const doc=new jsPDF('p','mm','a4');
       const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight(), L=18, R=W-18, gold=[202,164,93], dark=[17,17,17];
+
       const companyName=document.getElementById('companyName').value.trim()||'Luxury Agency';
       const companyAddress=document.getElementById('companyAddress').value.trim()||'Company address';
-      const invoiceNumber=document.getElementById('invoiceNumber').value.trim()||getAutoInvoiceNumber();
-      const date=fmtDate(document.getElementById('date').value), dueDate=fmtDate(document.getElementById('dueDate').value), client=document.getElementById('clientName').value.trim()||'-', bank=document.getElementById('bankName').value.trim()||'-', acc=document.getElementById('accountNumber').value.trim()||'-', note=document.getElementById('paymentNote').value.trim()||(currentLang==='id'?'Scan QR untuk pembayaran':'Scan QR for payment'), issuer=document.getElementById('issuerName').value.trim()||'-';
+      const invoiceNumberInput=document.getElementById('invoiceNumber');
+      if(!invoiceNumberInput.value.trim()) invoiceNumberInput.value=getAutoInvoiceNumber();
+      const invoiceNumber=invoiceNumberInput.value.trim();
+      const date=document.getElementById('date').value;
+      const dueDate=document.getElementById('dueDate').value;
+      const client=document.getElementById('clientName').value.trim()||'-';
+      const bank=document.getElementById('bankName').value.trim()||'-';
+      const acc=document.getElementById('accountNumber').value.trim()||'-';
+      const note=document.getElementById('paymentNote').value.trim()||(currentLang==='id'?'Scan QR untuk pembayaran':'Scan QR for payment');
+      const issuer=document.getElementById('issuerName').value.trim()||'-';
+      const recipientEmail=document.getElementById('recipientEmail').value.trim();
+      const whatsAppNumber=document.getElementById('whatsAppNumber').value.trim();
       const logoData=(currentMode==='free')?null:await fileToDataURL(document.getElementById('logo').files[0]);
 
       let items=[], subtotal=0, taxTotal=0;
-      document.querySelectorAll('#itemsTable tbody tr').forEach(r=>{const desc=r.cells[0].querySelector('input').value.trim()||'-'; const qty=parseFloat(r.cells[1].querySelector('input').value)||0; const price=parseFloat(r.cells[2].querySelector('input').value)||0; const tax=parseFloat(r.cells[3].querySelector('input').value)||0; const st=qty*price, tt=st*(tax/100); subtotal+=st; taxTotal+=tt; items.push({desc,qty,price,st,tt})});
+      document.querySelectorAll('#itemsTable tbody tr').forEach(r=>{
+        const desc=r.cells[0].querySelector('input').value.trim()||'-';
+        const qty=parseFloat(r.cells[1].querySelector('input').value)||0;
+        const price=parseFloat(r.cells[2].querySelector('input').value)||0;
+        const tax=parseFloat(r.cells[3].querySelector('input').value)||0;
+        const st=qty*price, tt=st*(tax/100);
+        subtotal+=st; taxTotal+=tt;
+        items.push({desc,qty,price,st,tt});
+      });
       const total=subtotal+taxTotal;
       const qrData=(currentMode!=='free')?makeQRDataURL(`${companyName} | ${invoiceNumber} | ${bank} | ${acc} | ${money(total)}`):null;
 
-      drawWatermark(doc, currentLang==='id' ? 'INVOICE PREMIUM' : 'PREMIUM INVOICE');
+      if(logoData) drawWatermarkLogo(doc, logoData);
+      else drawWatermarkText(doc, currentLang === 'id' ? 'INVOICE PREMIUM' : 'PREMIUM INVOICE');
+
       doc.setFillColor(10,10,10); doc.rect(0,0,W,H,'F');
       doc.setFillColor(255,255,255); doc.roundedRect(10,10,W-20,H-20,6,6,'F');
-      doc.setFillColor(dark[0],dark[1],dark[2]); doc.roundedRect(10,10,W-20,40,6,6,'F');
-      doc.setFillColor(gold[0],gold[1],gold[2]); doc.rect(10,50,W-20,1.5,'F');
+      doc.setFillColor(...dark); doc.roundedRect(10,10,W-20,40,6,6,'F');
+      doc.setFillColor(...gold); doc.rect(10,50,W-20,1.5,'F');
 
       doc.setDrawColor(...gold); doc.setFillColor(255,255,255); doc.roundedRect(18,14,26,26,4,4,'FD');
       if(logoData){ try{doc.addImage(logoData,'PNG',20,16,22,22)}catch(e){} }
@@ -376,10 +570,13 @@
 
       let y=startY+12;
       items.forEach((it,i)=>{
-        if(y>240){doc.addPage(); drawWatermark(doc, currentLang==='id' ? 'INVOICE PREMIUM' : 'PREMIUM INVOICE'); y=22}
-        if(i%2===0){ doc.setFillColor(252,250,245); doc.roundedRect(L-1,y-5,W-2*L+2,10,2,2,'F') }
+        if(y>240){ doc.addPage(); if(logoData) drawWatermarkLogo(doc, logoData); else drawWatermarkText(doc, currentLang === 'id' ? 'INVOICE PREMIUM' : 'PREMIUM INVOICE'); y=22; }
+        if(i%2===0){ doc.setFillColor(252,250,245); doc.roundedRect(L-1,y-5,W-2*L+2,10,2,2,'F'); }
         doc.setFont('Helvetica','normal'); doc.setTextColor(35,35,35);
-        doc.text(doc.splitTextToSize(it.desc,75),L,y); doc.text(String(it.qty),115,y,{align:'right'}); doc.text(money(it.price),145,y,{align:'right'}); doc.text(money(it.tt),175,y,{align:'right'});
+        doc.text(doc.splitTextToSize(it.desc,75),L,y);
+        doc.text(String(it.qty),115,y,{align:'right'});
+        doc.text(money(it.price),145,y,{align:'right'});
+        doc.text(money(it.tt),175,y,{align:'right'});
         y+=11;
       });
 
@@ -395,24 +592,75 @@
       doc.setFont('Helvetica','bold'); doc.setFontSize(18); doc.text(money(total),R-52,boxY+21,{align:'center'});
       doc.setFont('Helvetica','normal'); doc.setFontSize(8); doc.setTextColor(200,200,200); doc.text(currentLang==='id'?'Sudah termasuk pajak':'Tax included',R-52,boxY+29,{align:'center'});
 
-      if(qrData){ doc.setFillColor(255,255,255); doc.roundedRect(R-34,boxY+50,26,26,4,4,'FD'); try{doc.addImage(qrData,'PNG',R-32,boxY+52,22,22)}catch(e){} doc.setFont('Helvetica','normal'); doc.setFontSize(8); doc.setTextColor(90,90,90); doc.text(note,R,boxY+79,{align:'right'}) }
+      if(qrData){
+        doc.setFillColor(255,255,255); doc.roundedRect(R-34,boxY+50,26,26,4,4,'FD');
+        try{doc.addImage(qrData,'PNG',R-32,boxY+52,22,22)}catch(e){}
+        doc.setFont('Helvetica','normal'); doc.setFontSize(8); doc.setTextColor(90,90,90); doc.text(note,R,boxY+79,{align:'right'});
+      }
+
       doc.setFont('Helvetica','bold'); doc.setTextColor(202,164,93); doc.setFontSize(24); doc.text('PAID',R-8,H-30,{angle:18});
       doc.setFont('Helvetica','normal'); doc.setFontSize(10); doc.setTextColor(95,95,95); doc.text(currentLang==='id'?'Terima kasih atas kepercayaan Anda.':'Thank you for choosing our services.',L,H-24);
       doc.setTextColor(70,70,70); doc.text(currentLang==='id'?'Hormat kami,':'Sincerely,',R,H-43,{align:'right'}); doc.line(R-60,H-32,R,H-32); doc.setFont('Times','bold'); doc.text(issuer,R,H-18,{align:'right'});
 
       const pages=doc.getNumberOfPages();
       doc.setFont('Helvetica','normal'); doc.setFontSize(9); doc.setTextColor(120,120,120);
-      for(let i=1;i<=pages;i++){doc.setPage(i); doc.text(`Page ${i} of ${pages}`,W/2,H-8,{align:'center'})}
-      doc.save(`invoice-${invoiceNumber}.pdf`);
+      for(let i=1;i<=pages;i++){ doc.setPage(i); doc.text(`Page ${i} of ${pages}`,W/2,H-8,{align:'center'}); }
+
+      return { doc, invoiceNumber, recipientEmail, whatsAppNumber, client, companyName, total };
+    }
+
+    async function generatePDF(){
+      if(!validateInvoiceForm()) return;
+      const result = await buildInvoicePDF();
+      result.doc.save(`invoice-${result.invoiceNumber}.pdf`);
+    }
+
+    async function sendInvoiceEmail(){
+      if(!validateInvoiceForm({needEmail:true})) return;
+      setButtonLoading('btnEmail', true, currentLang === 'id' ? 'Mengirim...' : 'Sending...');
+      try{
+        const result = await buildInvoicePDF();
+        const pdfBase64 = result.doc.output('datauristring');
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          to_email: result.recipientEmail,
+          subject: `Invoice ${result.invoiceNumber}`,
+          message: currentLang === 'id' ? `Halo ${result.client}, berikut invoice ${result.invoiceNumber}.` : `Hello ${result.client}, here is invoice ${result.invoiceNumber}.`,
+          company_name: result.companyName,
+          invoice_number: result.invoiceNumber,
+          client_name: result.client,
+          total_amount: result.total,
+          attachment: pdfBase64
+        });
+        alert(currentLang === 'id' ? 'Email berhasil dikirim.' : 'Email sent successfully.');
+      }catch(err){
+        alert((currentLang === 'id' ? 'Gagal kirim email: ' : 'Failed to send email: ') + (err?.text || err?.message || 'unknown error'));
+      }finally{
+        setButtonLoading('btnEmail', false);
+      }
+    }
+
+    async function shareWhatsAppInvoice(){
+      if(!validateInvoiceForm({needWhatsApp:true})) return;
+      setButtonLoading('btnWa', true, currentLang === 'id' ? 'Membuka...' : 'Opening...');
+      try{
+        const result = await buildInvoicePDF();
+        const phone = normalizePhone(result.whatsAppNumber);
+        const msg = currentLang === 'id'
+          ? `Halo ${result.client}, berikut invoice ${result.invoiceNumber} dari ${result.companyName}.`
+          : `Hello ${result.client}, here is invoice ${result.invoiceNumber} from ${result.companyName}.`;
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+      }finally{
+        setButtonLoading('btnWa', false);
+      }
     }
 
     const today=new Date();
     document.getElementById('date').value=today.toISOString().split('T')[0];
     const due=new Date(today); due.setDate(due.getDate()+7);
     document.getElementById('dueDate').value=due.toISOString().split('T')[0];
-
-    document.getElementById('invoiceNumber').value = getAutoInvoiceNumber();
+    document.getElementById('invoiceNumber').value=getAutoInvoiceNumber();
     applyTexts();
+    setMode('luxury');
   </script>
 </body>
 </html>
