@@ -357,7 +357,7 @@
                       <td><input type="text" class="form-control" value="Brand Strategy Package"></td>
                       <td><input type="number" class="form-control" value="1" min="0"></td>
                       <td><input type="number" class="form-control" value="5000" min="0"></td>
-                      <td><input type="number" class="form-control" value="10" min="0"></td>
+                      <td><input type="number" class="form-control" value="0" min="0"></td>
                       <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)" id="btnRemove">Hapus</button></td>
                     </tr>
                   </tbody>
@@ -451,7 +451,6 @@
     function validateEmail(email){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase())}
     function normalizePhone(phone){return phone.replace(/[^\d]/g,'')}
     function validatePhone(phone){const p=normalizePhone(phone);return p.length>=10&&p.length<=15}
-
     function validateInvoiceForm({needEmail=false,needWhatsApp=false}={}){
       clearAllFieldStates();
       const companyName=document.getElementById('companyName').value.trim();
@@ -610,9 +609,15 @@
     }
 
     async function generatePDF(){
-      if(!validateInvoiceForm()) return;
-      const result = await buildInvoicePDF();
-      result.doc.save(`invoice-${result.invoiceNumber}.pdf`);
+      try{
+        if(!validateInvoiceForm()) return;
+        const result = await buildInvoicePDF();
+        if(!result || !result.doc){ alert(currentLang==='id'?'PDF gagal dibuat.':'PDF failed to generate.'); return; }
+        result.doc.save(`invoice-${result.invoiceNumber}.pdf`);
+      }catch(err){
+        console.error(err);
+        alert(currentLang==='id'?'Terjadi error saat membuat PDF.':'An error occurred while generating PDF.');
+      }
     }
 
     async function sendInvoiceEmail(){
