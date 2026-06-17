@@ -8,11 +8,15 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
     :root{
-      --bg1:#080808; --bg2:#171717; --gold:#caa45d; --gold2:#ead49a; --paper:#ffffff;
-      --ink:#1c1c1c; --muted:#6d6d6d; --danger:#dc3545;
+      --bg1:#080808;
+      --bg2:#171717;
+      --gold:#caa45d;
+      --gold2:#ead49a;
+      --danger:#dc3545;
     }
     body{
-      margin:0; min-height:100vh;
+      margin:0;
+      min-height:100vh;
       background:
         radial-gradient(circle at top left, rgba(202,164,93,.15), transparent 22%),
         radial-gradient(circle at bottom right, rgba(255,255,255,.08), transparent 24%),
@@ -22,98 +26,227 @@
     }
     .shell{ padding:24px 0 42px; }
     .hero{ text-align:center; margin-bottom:16px; }
-    .hero h1{ font-family:Georgia, "Times New Roman", serif; font-weight:800; letter-spacing:1px; margin:0 0 6px; }
+    .hero h1{
+      font-family:Georgia, "Times New Roman", serif;
+      font-weight:800;
+      letter-spacing:1px;
+      margin:0 0 6px;
+    }
     .hero p{ margin:0; color:rgba(255,255,255,.82); }
 
     .invoice-box{
-      max-width:1240px; margin:0 auto; background:rgba(255,255,255,.985);
-      border-radius:28px; overflow:hidden; box-shadow:0 26px 90px rgba(0,0,0,.46);
+      max-width:1240px;
+      margin:0 auto;
+      background:rgba(255,255,255,.985);
+      border-radius:28px;
+      overflow:hidden;
+      box-shadow:0 26px 90px rgba(0,0,0,.46);
       border:1px solid rgba(202,164,93,.28);
     }
     .top-strip{ height:12px; background:linear-gradient(90deg, #6f541d, var(--gold), var(--gold2), #9f7c2b); }
     .content{ padding:24px; }
     .panel-head{
-      display:flex; justify-content:space-between; gap:18px; align-items:flex-start;
-      border-bottom:1px solid #efe6d2; padding-bottom:14px; margin-bottom:18px;
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      align-items:flex-start;
+      border-bottom:1px solid #efe6d2;
+      padding-bottom:14px;
+      margin-bottom:18px;
     }
-    .panel-head h2{ margin:0; font-family:Georgia, "Times New Roman", serif; color:#111; font-weight:800; }
+    .panel-head h2{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      color:#111;
+      font-weight:800;
+    }
     .badge-premium{
-      background:linear-gradient(135deg, #111, #333); color:var(--gold2);
-      border:1px solid rgba(202,164,93,.55); padding:8px 14px; border-radius:999px;
-      font-size:12px; letter-spacing:.7px; text-transform:uppercase;
+      background:linear-gradient(135deg, #111, #333);
+      color:var(--gold2);
+      border:1px solid rgba(202,164,93,.55);
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:12px;
+      letter-spacing:.7px;
+      text-transform:uppercase;
     }
     .form-label{ font-weight:700; color:#262626; }
-    .form-control{ border-radius:12px; border-color:#ded6c8; box-shadow:none; }
-    .form-control:focus{ border-color:var(--gold); box-shadow:0 0 0 .2rem rgba(202,164,93,.14); }
-    .section-title{ color:#111; font-weight:800; margin:22px 0 12px; position:relative; padding-left:14px; }
-    .section-title::before{
-      content:""; position:absolute; left:0; top:4px; width:4px; height:18px;
-      background:linear-gradient(180deg, var(--gold), #8f6b23); border-radius:999px;
+    .form-control{
+      border-radius:12px;
+      border-color:#ded6c8;
+      box-shadow:none;
     }
-    .table-wrap{ border-radius:16px; overflow:hidden; border:1px solid #e8dfcf; }
+    .form-control:focus{
+      border-color:var(--gold);
+      box-shadow:0 0 0 .2rem rgba(202,164,93,.14);
+    }
+    .section-title{
+      color:#111;
+      font-weight:800;
+      margin:22px 0 12px;
+      position:relative;
+      padding-left:14px;
+    }
+    .section-title::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:4px;
+      width:4px;
+      height:18px;
+      background:linear-gradient(180deg, var(--gold), #8f6b23);
+      border-radius:999px;
+    }
+    .table-wrap{
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid #e8dfcf;
+    }
     .table{ margin-bottom:0; }
     .table thead th{
-      background:linear-gradient(90deg, #111, #2a2a2a); color:var(--gold2); border:none;
-      text-align:center; padding:14px 10px; font-weight:700;
+      background:linear-gradient(90deg, #111, #2a2a2a);
+      color:var(--gold2);
+      border:none;
+      text-align:center;
+      padding:14px 10px;
+      font-weight:700;
     }
-    .btn-success{ background:linear-gradient(90deg, #b89241, #7f6423); border:none; border-radius:12px; font-weight:700; padding:10px 16px; }
-    .btn-primary{ background:linear-gradient(90deg, #1d1d1d, #4a4a4a); border:none; border-radius:12px; font-weight:700; padding:10px 16px; }
-    .btn-info{ background:linear-gradient(90deg, #0aa3c2, #056f84); border:none; border-radius:12px; font-weight:700; padding:10px 16px; color:#fff; }
+    .btn-success{
+      background:linear-gradient(90deg, #b89241, #7f6423);
+      border:none;
+      border-radius:12px;
+      font-weight:700;
+      padding:10px 16px;
+    }
+    .btn-primary{
+      background:linear-gradient(90deg, #1d1d1d, #4a4a4a);
+      border:none;
+      border-radius:12px;
+      font-weight:700;
+      padding:10px 16px;
+    }
+    .btn-info{
+      background:linear-gradient(90deg, #0aa3c2, #056f84);
+      border:none;
+      border-radius:12px;
+      font-weight:700;
+      padding:10px 16px;
+      color:#fff;
+    }
     .btn-danger{ border-radius:10px; }
     .lux-note{
-      margin-top:14px; background:linear-gradient(135deg, #fffaf0, #fffdf7); border:1px solid #eadfca;
-      border-radius:14px; padding:14px 16px; color:#5f532f; font-size:14px;
+      margin-top:14px;
+      background:linear-gradient(135deg, #fffaf0, #fffdf7);
+      border:1px solid #eadfca;
+      border-radius:14px;
+      padding:14px 16px;
+      color:#5f532f;
+      font-size:14px;
     }
     .upgrade-card{
-      margin-top:18px; border-radius:20px; padding:18px;
+      margin-top:18px;
+      border-radius:20px;
+      padding:18px;
       background: linear-gradient(135deg, #151515, #2a2111);
-      border: 1px solid rgba(202,164,93,.35); box-shadow: 0 16px 35px rgba(0,0,0,.16); color:#fff;
+      border: 1px solid rgba(202,164,93,.35);
+      box-shadow: 0 16px 35px rgba(0,0,0,.16);
+      color:#fff;
     }
-    .upgrade-card .price{ font-size:24px; font-weight:800; color:var(--gold2); letter-spacing:.4px; }
-    footer{ text-align:center; color:rgba(255,255,255,.82); margin-top:18px; font-size:14px; }
+    .upgrade-card .price{
+      font-size:24px;
+      font-weight:800;
+      color:var(--gold2);
+      letter-spacing:.4px;
+    }
+    footer{
+      text-align:center;
+      color:rgba(255,255,255,.82);
+      margin-top:18px;
+      font-size:14px;
+    }
     .mode-switch .btn{ border-radius:12px; }
-    .mode-switch .btn.active{ background:linear-gradient(90deg, #1d1d1d, #4a4a4a); color:#fff; border-color:#1d1d1d; }
-    .action-bar{ display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap; margin-bottom:14px; }
+    .mode-switch .btn.active{
+      background:linear-gradient(90deg, #1d1d1d, #4a4a4a);
+      color:#fff;
+      border-color:#1d1d1d;
+    }
+    .action-bar{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
     .menu-btn, .lang-btn{
-      border-radius:12px; border:1px solid #ded6c8; background:#fff; color:#222; padding:10px 14px; font-weight:700;
+      border-radius:12px;
+      border:1px solid #ded6c8;
+      background:#fff;
+      color:#222;
+      padding:10px 14px;
+      font-weight:700;
     }
     .menu-panel{
-      display:none; border:1px solid #e8dfcf; border-radius:16px; padding:14px; background:#fff; margin-bottom:16px;
+      display:none;
+      border:1px solid #e8dfcf;
+      border-radius:16px;
+      padding:14px;
+      background:#fff;
+      margin-bottom:16px;
       box-shadow:0 12px 30px rgba(0,0,0,.06);
     }
     .menu-panel.show{ display:block; }
-    .free-disabled { pointer-events:none; opacity:.55; }
-
+    .free-disabled{
+      pointer-events:none;
+      opacity:.55;
+    }
     .form-control.is-invalid{
       border-color:var(--danger)!important;
       box-shadow:0 0 0 .2rem rgba(220,53,69,.15)!important;
       background-color:#fff5f5;
     }
-    .invalid-feedback{ display:none; color:var(--danger); font-size:.875rem; margin-top:6px; }
+    .invalid-feedback{
+      display:none;
+      color:var(--danger);
+      font-size:.875rem;
+      margin-top:6px;
+    }
     .form-control.is-invalid ~ .invalid-feedback{ display:block; }
-
     .shake{ animation:shake .45s ease-in-out; }
     @keyframes shake{
-      0%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)}
-      60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} 100%{transform:translateX(0)}
+      0%{transform:translateX(0)}
+      20%{transform:translateX(-6px)}
+      40%{transform:translateX(6px)}
+      60%{transform:translateX(-5px)}
+      80%{transform:translateX(5px)}
+      100%{transform:translateX(0)}
     }
-
     .item-row-error{ background:rgba(220,53,69,.05); }
     .item-row-error input{ border-color:var(--danger)!important; }
-
     .loading-btn{ pointer-events:none; opacity:.88; }
     .loading-spinner{
-      display:inline-block; width:1rem; height:1rem; margin-right:8px; border:2px solid rgba(255,255,255,.35);
-      border-top-color:#fff; border-radius:50%; animation:spin .8s linear infinite; vertical-align:-2px;
+      display:inline-block;
+      width:1rem;
+      height:1rem;
+      margin-right:8px;
+      border:2px solid rgba(255,255,255,.35);
+      border-top-color:#fff;
+      border-radius:50%;
+      animation:spin .8s linear infinite;
+      vertical-align:-2px;
     }
     @keyframes spin{ to{ transform:rotate(360deg); } }
-
-    .send-icon{ display:inline-flex; align-items:center; justify-content:center; margin-right:8px; }
+    .send-icon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-right:8px;
+    }
     .loading-btn .send-icon{ animation:planeSpin .9s linear infinite; }
     @keyframes planeSpin{
-      0%{transform:rotate(0deg)} 50%{transform:rotate(15deg)} 100%{transform:rotate(360deg)}
+      0%{transform:rotate(0deg)}
+      50%{transform:rotate(15deg)}
+      100%{transform:rotate(360deg)}
     }
-
     .field-hint{ font-size:12px; color:#8c8c8c; margin-top:5px; }
   </style>
 </head>
@@ -122,7 +255,7 @@
     <div class="container">
       <div class="hero">
         <h1 id="uiTitle">Luxury Invoice Generator</h1>
-        <p id="uiSubtitle">Versi paling premium tanpa autoTable</p>
+        <p id="uiSubtitle">Versi paling premium tanpa QR dan tanpa autoTable</p>
       </div>
 
       <div class="invoice-box">
@@ -219,8 +352,8 @@
 
             <div class="row g-3 mb-3">
               <div class="col-md-6 premium-only" id="qrNoteWrap">
-                <label class="form-label" id="lblPayNote">Keterangan Pembayaran / QR Text</label>
-                <input type="text" class="form-control" id="paymentNote" placeholder="Scan QR untuk pembayaran">
+                <label class="form-label" id="lblPayNote">Keterangan Pembayaran</label>
+                <input type="text" class="form-control" id="paymentNote" placeholder="Pembayaran via transfer bank">
                 <div class="invalid-feedback" id="paymentNoteError">Keterangan pembayaran wajib diisi.</div>
               </div>
               <div class="col-md-6">
@@ -286,7 +419,7 @@
               <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
                 <div>
                   <div class="fw-bold mb-1" id="upgradeTitle">Upgrade Premium</div>
-                  <div class="text-muted-light" id="upgradeDesc">Aktifkan logo, QR pembayaran, dan tampilan invoice lengkap.</div>
+                  <div class="text-muted-light" id="upgradeDesc">Aktifkan logo dan tampilan invoice lengkap.</div>
                 </div>
                 <div class="price">RP. 10.000/BULAN</div>
               </div>
@@ -300,7 +433,6 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -309,18 +441,106 @@
     const EMAILJS_SERVICE_ID='YOUR_SERVICE_ID';
     const EMAILJS_TEMPLATE_ID='YOUR_TEMPLATE_ID';
     const EMAILJS_PUBLIC_KEY='YOUR_PUBLIC_KEY';
-    emailjs.init(EMAILJS_PUBLIC_KEY);
+    if (window.emailjs) emailjs.init(EMAILJS_PUBLIC_KEY);
 
-    const t={id:{title:'Luxury Invoice Generator',subtitle:'Versi paling premium tanpa autoTable',panelTitle:'Luxury Billing System',panelSub:'Header dua kolom, layout manual, dan tampilan corporate premium.',modeLabel:'Pilih Mode',modeDesc:'Free tidak mendukung logo dan QR pembayaran.',companyName:'Nama Perusahaan / Agency',logo:'Logo Perusahaan',address:'Alamat Perusahaan',invoiceNo:'Invoice #',date:'Tanggal',dueDate:'Jatuh Tempo',client:'Nama Klien',bank:'Nama Bank',acc:'Nomor Rekening',payNote:'Keterangan Pembayaran / QR Text',issuer:'Nama Pembuat Invoice / TTD',email:'Email Penerima',whatsApp:'Nomor WhatsApp',items:'Daftar Item',desc:'Deskripsi',qty:'Qty',price:'Harga',tax:'Pajak (%)',action:'Aksi',remove:'Hapus',add:'Tambah Item',generate:'Download Invoice PDF',emailBtn:'Kirim Email',waBtn:'Kirim WhatsApp',note:'Gunakan logo transparan dan alamat singkat agar hasil PDF terlihat seperti invoice korporat sungguhan.',upgradeTitle:'Upgrade Premium',upgradeDesc:'Aktifkan logo, QR pembayaran, dan tampilan invoice lengkap.',langBtn:'Bahasa',free:'Free',premium:'Premium',luxury:'Luxury'},
-    en:{title:'Luxury Invoice Generator',subtitle:'The most premium version without autoTable',panelTitle:'Luxury Billing System',panelSub:'Two-column header, manual layout, and premium corporate styling.',modeLabel:'Choose Mode',modeDesc:'Free mode does not support logo and payment QR.',companyName:'Company / Agency Name',logo:'Company Logo',address:'Company Address',invoiceNo:'Invoice #',date:'Date',dueDate:'Due Date',client:'Client Name',bank:'Bank Name',acc:'Account Number',payNote:'Payment Note / QR Text',issuer:'Issuer Name / Signature',email:'Recipient Email',whatsApp:'WhatsApp Number',items:'Items',desc:'Description',qty:'Qty',price:'Price',tax:'Tax (%)',action:'Action',remove:'Remove',add:'Add Item',generate:'Download Invoice PDF',emailBtn:'Send Email',waBtn:'Send WhatsApp',note:'Use a transparent logo and short address to keep the PDF looking corporate.',upgradeTitle:'Upgrade Premium',upgradeDesc:'Enable logo, payment QR, and full invoice styling.',langBtn:'Language',free:'Free',premium:'Premium',luxury:'Luxury'}};
+    const t={
+      id:{
+        title:'Luxury Invoice Generator',
+        subtitle:'Versi paling premium tanpa QR dan tanpa autoTable',
+        panelTitle:'Luxury Billing System',
+        panelSub:'Header dua kolom, layout manual, dan tampilan corporate premium.',
+        modeLabel:'Pilih Mode',
+        modeDesc:'Free tidak mendukung logo dan QR pembayaran.',
+        companyName:'Nama Perusahaan / Agency',
+        logo:'Logo Perusahaan',
+        address:'Alamat Perusahaan',
+        invoiceNo:'Invoice #',
+        date:'Tanggal',
+        dueDate:'Jatuh Tempo',
+        client:'Nama Klien',
+        bank:'Nama Bank',
+        acc:'Nomor Rekening',
+        payNote:'Keterangan Pembayaran',
+        issuer:'Nama Pembuat Invoice / TTD',
+        email:'Email Penerima',
+        whatsApp:'Nomor WhatsApp',
+        items:'Daftar Item',
+        desc:'Deskripsi',
+        qty:'Qty',
+        price:'Harga',
+        tax:'Pajak (%)',
+        action:'Aksi',
+        remove:'Hapus',
+        add:'Tambah Item',
+        generate:'Download Invoice PDF',
+        emailBtn:'Kirim Email',
+        waBtn:'Kirim WhatsApp',
+        note:'Gunakan logo transparan dan alamat singkat agar hasil PDF terlihat seperti invoice korporat sungguhan.',
+        upgradeTitle:'Upgrade Premium',
+        upgradeDesc:'Aktifkan logo dan tampilan invoice lengkap.',
+        langBtn:'Bahasa',
+        free:'Free',
+        premium:'Premium',
+        luxury:'Luxury'
+      },
+      en:{
+        title:'Luxury Invoice Generator',
+        subtitle:'The most premium version without QR and without autoTable',
+        panelTitle:'Luxury Billing System',
+        panelSub:'Two-column header, manual layout, and premium corporate styling.',
+        modeLabel:'Choose Mode',
+        modeDesc:'Free mode does not support logo and payment QR.',
+        companyName:'Company / Agency Name',
+        logo:'Company Logo',
+        address:'Company Address',
+        invoiceNo:'Invoice #',
+        date:'Date',
+        dueDate:'Due Date',
+        client:'Client Name',
+        bank:'Bank Name',
+        acc:'Account Number',
+        payNote:'Payment Note',
+        issuer:'Issuer Name / Signature',
+        email:'Recipient Email',
+        whatsApp:'WhatsApp Number',
+        items:'Items',
+        desc:'Description',
+        qty:'Qty',
+        price:'Price',
+        tax:'Tax (%)',
+        action:'Action',
+        remove:'Remove',
+        add:'Add Item',
+        generate:'Download Invoice PDF',
+        emailBtn:'Send Email',
+        waBtn:'Send WhatsApp',
+        note:'Use a transparent logo and short address to keep the PDF looking corporate.',
+        upgradeTitle:'Upgrade Premium',
+        upgradeDesc:'Enable logo and full invoice styling.',
+        langBtn:'Language',
+        free:'Free',
+        premium:'Premium',
+        luxury:'Luxury'
+      }
+    };
 
-    function toggleMenu(){document.getElementById('menuPanel').classList.toggle('show')}
+    function toggleMenu(){ document.getElementById('menuPanel').classList.toggle('show'); }
     function applyTexts(){
       const x=t[currentLang];
-      Object.entries({uiTitle:x.title,uiSubtitle:x.subtitle,uiPanelTitle:x.panelTitle,uiPanelSub:x.panelSub,modeLabel:x.modeLabel,modeDesc:x.modeDesc,lblCompanyName:x.companyName,lblLogo:x.logo,lblAddress:x.address,lblInvoiceNo:x.invoiceNo,lblDate:x.date,lblDueDate:x.dueDate,lblClient:x.client,lblBank:x.bank,lblAcc:x.acc,lblPayNote:x.payNote,lblIssuer:x.issuer,lblEmail:x.email,lblWhatsApp:x.whatsApp,lblItems:x.items,thDesc:x.desc,thQty:x.qty,thPrice:x.price,thTax:x.tax,thAction:x.action,btnRemove:x.remove,btnAdd:x.add,btnDownload:x.generate,btnEmailText:x.emailBtn,btnWaText:x.waBtn,noteBox:x.note,upgradeTitle:x.upgradeTitle,upgradeDesc:x.upgradeDesc,langBtn:x.langBtn,freeModeBtn:x.free,premiumModeBtn:x.premium,luxuryModeBtn:x.luxury}).forEach(([k,v])=>document.getElementById(k).innerText=v);
+      Object.entries({
+        uiTitle:x.title, uiSubtitle:x.subtitle, uiPanelTitle:x.panelTitle, uiPanelSub:x.panelSub,
+        modeLabel:x.modeLabel, modeDesc:x.modeDesc, lblCompanyName:x.companyName, lblLogo:x.logo,
+        lblAddress:x.address, lblInvoiceNo:x.invoiceNo, lblDate:x.date, lblDueDate:x.dueDate,
+        lblClient:x.client, lblBank:x.bank, lblAcc:x.acc, lblPayNote:x.payNote, lblIssuer:x.issuer,
+        lblEmail:x.email, lblWhatsApp:x.whatsApp, lblItems:x.items, thDesc:x.desc, thQty:x.qty,
+        thPrice:x.price, thTax:x.tax, thAction:x.action, btnRemove:x.remove, btnAdd:x.add,
+        btnDownload:x.generate, btnEmailText:x.emailBtn, btnWaText:x.waBtn, noteBox:x.note,
+        upgradeTitle:x.upgradeTitle, upgradeDesc:x.upgradeDesc, langBtn:x.langBtn,
+        freeModeBtn:x.free, premiumModeBtn:x.premium, luxuryModeBtn:x.luxury
+      }).forEach(([k,v])=>document.getElementById(k).innerText=v);
       document.documentElement.lang=currentLang;
     }
-    function setLanguage(lang){currentLang=lang;applyTexts()}
+    function setLanguage(lang){ currentLang=lang; applyTexts(); }
     function setMode(mode){
       currentMode=mode;
       document.getElementById('freeModeBtn').classList.toggle('active', mode==='free');
@@ -330,23 +550,69 @@
       if(mode==='free'){ logoWrap.classList.add('free-disabled'); qrWrap.classList.add('free-disabled'); }
       else { logoWrap.classList.remove('free-disabled'); qrWrap.classList.remove('free-disabled'); }
     }
+
     function addRow(){
-      const tb=document.querySelector('#itemsTable tbody'); const r=tb.insertRow();
-      r.innerHTML=`<td><input type="text" class="form-control" placeholder="${currentLang==='id'?'Deskripsi':'Description'}"></td><td><input type="number" class="form-control" value="1" min="0"></td><td><input type="number" class="form-control" value="0" min="0"></td><td><input type="number" class="form-control" value="0" min="0"></td><td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">${t[currentLang].remove}</button></td>`;
+      const tb=document.querySelector('#itemsTable tbody');
+      const r=tb.insertRow();
+      r.innerHTML = `
+        <td><input type="text" class="form-control" placeholder="${currentLang==='id'?'Deskripsi':'Description'}"></td>
+        <td><input type="number" class="form-control" value="1" min="0"></td>
+        <td><input type="number" class="form-control" value="0" min="0"></td>
+        <td><input type="number" class="form-control" value="0" min="0"></td>
+        <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">${t[currentLang].remove}</button></td>
+      `;
     }
-    function removeRow(btn){const row=btn.closest('tr');if(document.querySelectorAll('#itemsTable tbody tr').length>1)row.remove();else alert(currentLang==='id'?'Minimal harus ada 1 item.':'At least 1 item is required.')}
-    async function fileToDataURL(file){return new Promise((res,rej)=>{if(!file)return res(null);const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
-    function fmtDate(s){if(!s)return'-';return new Date(s+'T00:00:00').toLocaleDateString(currentLang==='id'?'id-ID':'en-US',{year:'numeric',month:'long',day:'numeric'})}
-    function makeQRDataURL(text){const d=document.createElement('div');d.style.position='fixed';d.style.left='-9999px';document.body.appendChild(d);new QRCode(d,{text,width:120,height:120,colorDark:"#111",colorLight:"#fff",correctLevel:QRCode.CorrectLevel.H});const i=d.querySelector('img'),c=d.querySelector('canvas');const out=i&&i.src?i.src:(c?c.toDataURL("image/png"):null);document.body.removeChild(d);return out}
-    function money(v){return new Intl.NumberFormat(currentLang==='id'?'id-ID':'en-US',{style:'currency',currency:'USD'}).format(v)}
-    function drawLine(doc,x1,y1,x2,y2,c=[220,210,190]){doc.setDrawColor(...c);doc.line(x1,y1,x2,y2)}
-    function getAutoInvoiceNumber(){const key='lux_invoice_counter';let n=parseInt(localStorage.getItem(key)||'1000',10)+1;localStorage.setItem(key,String(n));const year=new Date().getFullYear();return `INV/${year}/${String(n).padStart(4,'0')}`}
-    function triggerShake(el){if(!el)return;el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');el.addEventListener('animationend',()=>el.classList.remove('shake'),{once:true})}
-    function setFieldState(id,isValid,message=''){const el=document.getElementById(id),err=document.getElementById(id+'Error');if(!el)return;el.classList.toggle('is-invalid',!isValid);if(err)err.textContent=message;if(!isValid)triggerShake(el)}
-    function clearAllFieldStates(){['companyName','companyAddress','clientName','recipientEmail','whatsAppNumber','bankName','accountNumber','paymentNote','issuerName','date','dueDate'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('is-invalid','shake')});document.querySelectorAll('#itemsTable tbody tr').forEach(r=>r.classList.remove('item-row-error'))}
-    function validateEmail(email){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase())}
-    function normalizePhone(phone){return phone.replace(/[^\d]/g,'')}
-    function validatePhone(phone){const p=normalizePhone(phone);return p.length>=10&&p.length<=15}
+    function removeRow(btn){
+      const row=btn.closest('tr');
+      if(document.querySelectorAll('#itemsTable tbody tr').length>1) row.remove();
+      else alert(currentLang==='id'?'Minimal harus ada 1 item.':'At least 1 item is required.');
+    }
+    async function fileToDataURL(file){
+      return new Promise((res,rej)=>{
+        if(!file) return res(null);
+        const r=new FileReader();
+        r.onload=()=>res(r.result);
+        r.onerror=rej;
+        r.readAsDataURL(file);
+      });
+    }
+    function fmtDate(s){
+      if(!s) return '-';
+      return new Date(s+'T00:00:00').toLocaleDateString(currentLang==='id'?'id-ID':'en-US',{year:'numeric',month:'long',day:'numeric'});
+    }
+    function money(v){
+      return new Intl.NumberFormat(currentLang==='id'?'id-ID':'en-US',{style:'currency',currency:'USD'}).format(v);
+    }
+    function drawLine(doc,x1,y1,x2,y2,c=[220,210,190]){ doc.setDrawColor(...c); doc.line(x1,y1,x2,y2); }
+    function getAutoInvoiceNumber(){
+      const key='lux_invoice_counter';
+      let n=parseInt(localStorage.getItem(key)||'1000',10)+1;
+      localStorage.setItem(key,String(n));
+      const year=new Date().getFullYear();
+      return `INV/${year}/${String(n).padStart(4,'0')}`;
+    }
+    function triggerShake(el){
+      if(!el) return;
+      el.classList.remove('shake');
+      void el.offsetWidth;
+      el.classList.add('shake');
+      el.addEventListener('animationend',()=>el.classList.remove('shake'),{once:true});
+    }
+    function setFieldState(id,isValid,message=''){
+      const el=document.getElementById(id), err=document.getElementById(id+'Error');
+      if(!el) return;
+      el.classList.toggle('is-invalid',!isValid);
+      if(err) err.textContent=message;
+      if(!isValid) triggerShake(el);
+    }
+    function clearAllFieldStates(){
+      ['companyName','companyAddress','clientName','recipientEmail','whatsAppNumber','bankName','accountNumber','paymentNote','issuerName','date','dueDate']
+        .forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.remove('is-invalid','shake'); });
+      document.querySelectorAll('#itemsTable tbody tr').forEach(r=>r.classList.remove('item-row-error'));
+    }
+    function validateEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase()); }
+    function normalizePhone(phone){ return phone.replace(/[^\d]/g,''); }
+    function validatePhone(phone){ const p=normalizePhone(phone); return p.length>=10&&p.length<=15; }
 
     function validateInvoiceForm({needEmail=false,needWhatsApp=false}={}){
       clearAllFieldStates();
@@ -364,52 +630,101 @@
 
       let firstInvalid=null, subtotal=0, taxTotal=0, hasValidItem=false;
 
-      if(!companyName){setFieldState('companyName',false,currentLang==='id'?'Nama perusahaan wajib diisi.':'Company name is required.');firstInvalid ||= document.getElementById('companyName')}
-      if(!companyAddress){setFieldState('companyAddress',false,currentLang==='id'?'Alamat perusahaan wajib diisi.':'Company address is required.');firstInvalid ||= document.getElementById('companyAddress')}
-      if(!clientName){setFieldState('clientName',false,currentLang==='id'?'Nama klien wajib diisi.':'Client name is required.');firstInvalid ||= document.getElementById('clientName')}
-      if(!bankName){setFieldState('bankName',false,currentLang==='id'?'Nama bank wajib diisi.':'Bank name is required.');firstInvalid ||= document.getElementById('bankName')}
-      if(!accountNumber){setFieldState('accountNumber',false,currentLang==='id'?'Nomor rekening wajib diisi.':'Account number is required.');firstInvalid ||= document.getElementById('accountNumber')}
-      if(currentMode!=='free' && !paymentNote){setFieldState('paymentNote',false,currentLang==='id'?'Keterangan pembayaran wajib diisi.':'Payment note is required.');firstInvalid ||= document.getElementById('paymentNote')}
-      if(!issuerName){setFieldState('issuerName',false,currentLang==='id'?'Nama pembuat invoice wajib diisi.':'Issuer name is required.');firstInvalid ||= document.getElementById('issuerName')}
-      if(!date){setFieldState('date',false,currentLang==='id'?'Tanggal wajib diisi.':'Date is required.');firstInvalid ||= document.getElementById('date')}
-      if(!dueDate){setFieldState('dueDate',false,currentLang==='id'?'Jatuh tempo wajib diisi.':'Due date is required.');firstInvalid ||= document.getElementById('dueDate')}
+      if(!companyName){ setFieldState('companyName',false,currentLang==='id'?'Nama perusahaan wajib diisi.':'Company name is required.'); firstInvalid ||= document.getElementById('companyName'); }
+      if(!companyAddress){ setFieldState('companyAddress',false,currentLang==='id'?'Alamat perusahaan wajib diisi.':'Company address is required.'); firstInvalid ||= document.getElementById('companyAddress'); }
+      if(!clientName){ setFieldState('clientName',false,currentLang==='id'?'Nama klien wajib diisi.':'Client name is required.'); firstInvalid ||= document.getElementById('clientName'); }
+      if(!bankName){ setFieldState('bankName',false,currentLang==='id'?'Nama bank wajib diisi.':'Bank name is required.'); firstInvalid ||= document.getElementById('bankName'); }
+      if(!accountNumber){ setFieldState('accountNumber',false,currentLang==='id'?'Nomor rekening wajib diisi.':'Account number is required.'); firstInvalid ||= document.getElementById('accountNumber'); }
+      if(currentMode!=='free' && !paymentNote){ setFieldState('paymentNote',false,currentLang==='id'?'Keterangan pembayaran wajib diisi.':'Payment note is required.'); firstInvalid ||= document.getElementById('paymentNote'); }
+      if(!issuerName){ setFieldState('issuerName',false,currentLang==='id'?'Nama pembuat invoice wajib diisi.':'Issuer name is required.'); firstInvalid ||= document.getElementById('issuerName'); }
+      if(!date){ setFieldState('date',false,currentLang==='id'?'Tanggal wajib diisi.':'Date is required.'); firstInvalid ||= document.getElementById('date'); }
+      if(!dueDate){ setFieldState('dueDate',false,currentLang==='id'?'Jatuh tempo wajib diisi.':'Due date is required.'); firstInvalid ||= document.getElementById('dueDate'); }
 
       const rows=document.querySelectorAll('#itemsTable tbody tr');
       rows.forEach(r=>{
-        const descInput=r.cells[0].querySelector('input'), qtyInput=r.cells[1].querySelector('input'), priceInput=r.cells[2].querySelector('input'), taxInput=r.cells[3].querySelector('input');
-        const desc=descInput.value.trim(), qty=parseFloat(qtyInput.value), price=parseFloat(priceInput.value), tax=parseFloat(taxInput.value);
-        const rowValid=desc&&qty>0&&price>0&&tax>=0;
-        if(rowValid){hasValidItem=true; const st=qty*price; subtotal+=st; taxTotal+=st*(tax/100)}
-        else{r.classList.add('item-row-error'); [descInput,qtyInput,priceInput,taxInput].forEach(el=>{el.classList.add('is-invalid'); triggerShake(el)}); if(!firstInvalid) firstInvalid=descInput}
+        const descInput=r.cells[0].querySelector('input');
+        const qtyInput=r.cells[1].querySelector('input');
+        const priceInput=r.cells[2].querySelector('input');
+        const taxInput=r.cells[3].querySelector('input');
+        const desc=descInput.value.trim();
+        const qty=parseFloat(qtyInput.value);
+        const price=parseFloat(priceInput.value);
+        const tax=parseFloat(taxInput.value);
+        const rowValid=desc && qty>0 && price>0 && tax>=0;
+        if(rowValid){
+          hasValidItem=true;
+          const st=qty*price;
+          subtotal+=st;
+          taxTotal+=st*(tax/100);
+        }else{
+          r.classList.add('item-row-error');
+          [descInput,qtyInput,priceInput,taxInput].forEach(el=>{ el.classList.add('is-invalid'); triggerShake(el); });
+          if(!firstInvalid) firstInvalid=descInput;
+        }
       });
 
       const total=subtotal+taxTotal;
-      if(!hasValidItem){alert(currentLang==='id'?'Isi minimal 1 item yang valid.':'Fill at least 1 valid item.'); return false}
-      if(total<=0){alert(currentLang==='id'?'Total nominal tidak boleh nol.':'Total amount cannot be zero.'); triggerShake(document.getElementById('itemsTable')); return false}
+      if(!hasValidItem){
+        alert(currentLang==='id'?'Isi minimal 1 item yang valid.':'Fill at least 1 valid item.');
+        return false;
+      }
+      if(total<=0){
+        alert(currentLang==='id'?'Total nominal tidak boleh nol.':'Total amount cannot be zero.');
+        triggerShake(document.getElementById('itemsTable'));
+        return false;
+      }
 
-      if(needEmail && (!recipientEmail || !validateEmail(recipientEmail))){setFieldState('recipientEmail',false,currentLang==='id'?'Email penerima tidak valid.':'Recipient email is invalid.');firstInvalid ||= document.getElementById('recipientEmail')}
-      if(needWhatsApp && (!whatsAppNumber || !validatePhone(whatsAppNumber))){setFieldState('whatsAppNumber',false,currentLang==='id'?'Nomor WhatsApp tidak valid.':'WhatsApp number is invalid.');firstInvalid ||= document.getElementById('whatsAppNumber')}
+      if(needEmail && (!recipientEmail || !validateEmail(recipientEmail))){
+        setFieldState('recipientEmail',false,currentLang==='id'?'Email penerima tidak valid.':'Recipient email is invalid.');
+        firstInvalid ||= document.getElementById('recipientEmail');
+      }
+      if(needWhatsApp && (!whatsAppNumber || !validatePhone(whatsAppNumber))){
+        setFieldState('whatsAppNumber',false,currentLang==='id'?'Nomor WhatsApp tidak valid.':'WhatsApp number is invalid.');
+        firstInvalid ||= document.getElementById('whatsAppNumber');
+      }
 
-      if(firstInvalid){triggerShake(firstInvalid); firstInvalid.scrollIntoView({behavior:'smooth', block:'center'}); return false}
-      return true
+      if(firstInvalid){
+        triggerShake(firstInvalid);
+        firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+        return false;
+      }
+      return true;
     }
 
     function setButtonLoading(btnId, loading, loadingText='Memproses...'){
       const btn=document.getElementById(btnId), text=document.getElementById(btnId+'Text');
-      if(!btn||!text)return;
-      if(loading){btn.dataset.originalText=text.textContent; btn.classList.add('loading-btn'); btn.disabled=true; btn.innerHTML = btnId==='btnEmail' ? `<span class="loading-spinner"></span><span class="send-icon"><i class="bi bi-send-fill"></i></span><span id="${btnId}Text">${loadingText}</span>` : `<span class="loading-spinner"></span><span id="${btnId}Text">${loadingText}</span>`}
-      else{btn.classList.remove('loading-btn'); btn.disabled=false; btn.innerHTML = btnId==='btnEmail' ? `<span class="send-icon"><i class="bi bi-send-fill"></i></span><span id="${btnId}Text">${btn.dataset.originalText||text.textContent}</span>` : `<i class="bi bi-whatsapp me-1"></i><span id="${btnId}Text">${btn.dataset.originalText||text.textContent}</span>`}
+      if(!btn||!text) return;
+      if(loading){
+        btn.dataset.originalText=text.textContent;
+        btn.classList.add('loading-btn');
+        btn.disabled=true;
+        btn.innerHTML = btnId==='btnEmail'
+          ? `<span class="loading-spinner"></span><span class="send-icon"><i class="bi bi-send-fill"></i></span><span id="${btnId}Text">${loadingText}</span>`
+          : `<span class="loading-spinner"></span><span id="${btnId}Text">${loadingText}</span>`;
+      }else{
+        btn.classList.remove('loading-btn');
+        btn.disabled=false;
+        btn.innerHTML = btnId==='btnEmail'
+          ? `<span class="send-icon"><i class="bi bi-send-fill"></i></span><span id="${btnId}Text">${btn.dataset.originalText||text.textContent}</span>`
+          : `<i class="bi bi-whatsapp me-1"></i><span id="${btnId}Text">${btn.dataset.originalText||text.textContent}</span>`;
+      }
     }
 
-    function drawWatermarkLogo(doc, logoData){if(!logoData)return; const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight(); try{doc.addImage(logoData,'PNG',W/2-35,H/2-35,70,70,undefined,'FAST',45)}catch(e){}}
-    function drawWatermarkText(doc, text){const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight(); doc.setTextColor(235,228,214); doc.setFont('Helvetica','bold'); doc.setFontSize(42); doc.text(text,W/2,H/2,{align:'center',angle:45})}
+    function drawWatermarkText(doc,text){
+      const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight();
+      doc.setTextColor(235,228,214);
+      doc.setFont('Helvetica','bold');
+      doc.setFontSize(42);
+      doc.text(text,W/2,H/2,{align:'center',angle:45});
+    }
 
     async function buildInvoicePDF(){
       const {jsPDF}=window.jspdf;
       if(!jsPDF) throw new Error('jsPDF library not loaded');
 
       const doc=new jsPDF('p','mm','a4');
-      const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight(), L=18, R=W-18, gold=[202,164,93], dark=[17,17,17];
+      const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight();
+      const L=18, R=W-18, gold=[202,164,93], dark=[17,17,17];
 
       const companyName=document.getElementById('companyName').value.trim()||'Luxury Agency';
       const companyAddress=document.getElementById('companyAddress').value.trim()||'Company address';
@@ -421,56 +736,72 @@
       const client=document.getElementById('clientName').value.trim()||'-';
       const bank=document.getElementById('bankName').value.trim()||'-';
       const acc=document.getElementById('accountNumber').value.trim()||'-';
-      const note=document.getElementById('paymentNote').value.trim()||(currentLang==='id'?'Scan QR untuk pembayaran':'Scan QR for payment');
       const issuer=document.getElementById('issuerName').value.trim()||'-';
-      const recipientEmail=document.getElementById('recipientEmail').value.trim();
-      const whatsAppNumber=document.getElementById('whatsAppNumber').value.trim();
-      const logoData=(currentMode==='free')?null:await fileToDataURL(document.getElementById('logo').files[0]);
 
-      let items=[], subtotal=0, taxTotal=0;
-      document.querySelectorAll('#itemsTable tbody tr').forEach(r=>{
-        const desc=r.cells[0].querySelector('input').value.trim()||'-';
-        const qty=parseFloat(r.cells[1].querySelector('input').value)||0;
-        const price=parseFloat(r.cells[2].querySelector('input').value)||0;
-        const tax=parseFloat(r.cells[3].querySelector('input').value)||0;
-        const st=qty*price, tt=st*(tax/100);
-        subtotal+=st; taxTotal+=tt;
-        items.push({desc,qty,price,st,tt});
-      });
-      const total=subtotal+taxTotal;
-      const qrData=(currentMode!=='free')?makeQRDataURL(`${companyName} | ${invoiceNumber} | ${bank} | ${acc} | ${money(total)}`):null;
-
-      if(logoData) drawWatermarkLogo(doc, logoData);
-      else drawWatermarkText(doc, currentLang === 'id' ? 'INVOICE PREMIUM' : 'PREMIUM INVOICE');
+      drawWatermarkText(doc, currentLang==='id' ? 'INVOICE PREMIUM' : 'PREMIUM INVOICE');
 
       doc.setFillColor(10,10,10); doc.rect(0,0,W,H,'F');
       doc.setFillColor(255,255,255); doc.roundedRect(10,10,W-20,H-20,6,6,'F');
       doc.setFillColor(...dark); doc.roundedRect(10,10,W-20,40,6,6,'F');
       doc.setFillColor(...gold); doc.rect(10,50,W-20,1.5,'F');
 
-      doc.setDrawColor(...gold); doc.setFillColor(255,255,255); doc.roundedRect(18,14,26,26,4,4,'FD');
-      if(logoData){ try{doc.addImage(logoData,'PNG',20,16,22,22)}catch(e){} }
+      doc.setFillColor(255,255,255); doc.roundedRect(18,14,26,26,4,4,'FD');
+      doc.setTextColor(255,255,255);
+      doc.setFont('Times','bold'); doc.setFontSize(20);
+      doc.text(companyName,52,22);
+      doc.setFont('Helvetica','normal'); doc.setFontSize(9);
+      doc.setTextColor(225,225,225);
+      doc.text(doc.splitTextToSize(companyAddress,90),52,28);
 
-      doc.setTextColor(255,255,255); doc.setFont('Times','bold'); doc.setFontSize(20); doc.text(companyName,52,22);
-      doc.setFont('Helvetica','normal'); doc.setFontSize(9); doc.setTextColor(225,225,225); doc.text(doc.splitTextToSize(companyAddress,90),52,28);
-
-      doc.setFont('Helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...gold); doc.text(`${t[currentLang].invoiceNo}: ${invoiceNumber}`,R,22,{align:'right'});
-      doc.setFont('Helvetica','normal'); doc.setTextColor(70,70,70); doc.text(`${t[currentLang].date}: ${date}`,R,29,{align:'right'}); doc.text(`${t[currentLang].dueDate}: ${dueDate}`,R,36,{align:'right'}); doc.text(`${t[currentLang].client}: ${client}`,R,43,{align:'right'});
+      doc.setFont('Helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...gold);
+      doc.text(`${t[currentLang].invoiceNo}: ${invoiceNumber}`,R,22,{align:'right'});
+      doc.setFont('Helvetica','normal'); doc.setTextColor(70,70,70);
+      doc.text(`${t[currentLang].date}: ${fmtDate(date)}`,R,29,{align:'right'});
+      doc.text(`${t[currentLang].dueDate}: ${fmtDate(dueDate)}`,R,36,{align:'right'});
+      doc.text(`${t[currentLang].client}: ${client}`,R,43,{align:'right'});
 
       doc.setFillColor(250,247,239); doc.setDrawColor(235,226,205); doc.roundedRect(L-1,57,94,28,4,4,'FD');
-      doc.setFont('Helvetica','bold'); doc.setFontSize(10); doc.setTextColor(85,67,26); doc.text('BILL TO',L+3,64);
-      doc.setFont('Helvetica','normal'); doc.setTextColor(60,60,60); doc.text(client,L+3,71);
+      doc.setFont('Helvetica','bold'); doc.setFontSize(10); doc.setTextColor(85,67,26);
+      doc.text('BILL TO',L+3,64);
+      doc.setFont('Helvetica','normal'); doc.setTextColor(60,60,60);
+      doc.text(client,L+3,71);
+
+      const items=[];
+      let subtotal=0, taxTotal=0;
+      document.querySelectorAll('#itemsTable tbody tr').forEach(r=>{
+        const desc=r.cells[0].querySelector('input').value.trim()||'-';
+        const qty=parseFloat(r.cells[1].querySelector('input').value)||0;
+        const price=parseFloat(r.cells[2].querySelector('input').value)||0;
+        const tax=parseFloat(r.cells[3].querySelector('input').value)||0;
+        const st=qty*price;
+        const tt=st*(tax/100);
+        subtotal+=st;
+        taxTotal+=tt;
+        items.push({desc,qty,price,tt});
+      });
+      const total=subtotal+taxTotal;
 
       const startY=92;
       doc.setFont('Helvetica','bold'); doc.setFontSize(10); doc.setTextColor(17,17,17);
-      doc.text(t[currentLang].desc, L, startY); doc.text(t[currentLang].qty, 115, startY, {align:'right'}); doc.text(t[currentLang].price, 145, startY, {align:'right'}); doc.text(t[currentLang].tax, 175, startY, {align:'right'});
+      doc.text(t[currentLang].desc, L, startY);
+      doc.text(t[currentLang].qty, 115, startY, {align:'right'});
+      doc.text(t[currentLang].price, 145, startY, {align:'right'});
+      doc.text(t[currentLang].tax, 175, startY, {align:'right'});
       drawLine(doc,L,startY+3,R,startY+3,[210,200,180]);
 
       let y=startY+12;
       items.forEach((it,i)=>{
-        if(y>240){ doc.addPage(); if(logoData) drawWatermarkLogo(doc, logoData); else drawWatermarkText(doc, currentLang === 'id' ? 'INVOICE PREMIUM' : 'PREMIUM INVOICE'); y=22; }
-        if(i%2===0){ doc.setFillColor(252,250,245); doc.roundedRect(L-1,y-5,W-2*L+2,10,2,2,'F'); }
-        doc.setFont('Helvetica','normal'); doc.setTextColor(35,35,35);
+        if(y>240){
+          doc.addPage();
+          drawWatermarkText(doc, currentLang==='id' ? 'INVOICE PREMIUM' : 'PREMIUM INVOICE');
+          y=22;
+        }
+        if(i%2===0){
+          doc.setFillColor(252,250,245);
+          doc.roundedRect(L-1,y-5,W-2*L+2,10,2,2,'F');
+        }
+        doc.setFont('Helvetica','normal');
+        doc.setTextColor(35,35,35);
         doc.text(doc.splitTextToSize(it.desc,75),L,y);
         doc.text(String(it.qty),115,y,{align:'right'});
         doc.text(money(it.price),145,y,{align:'right'});
@@ -480,46 +811,56 @@
 
       const boxY=Math.max(y+8, 230);
       drawLine(doc,L,boxY-2,R,boxY-2,[231,224,209]);
+
       doc.setFillColor(250,247,239); doc.setDrawColor(235,226,205); doc.roundedRect(L,boxY,92,34,5,5,'FD');
-      doc.setFont('Helvetica','bold'); doc.setFontSize(10); doc.setTextColor(85,67,26); doc.text(currentLang==='id'?'Detail Pembayaran':'Payment Details',L+4,boxY+7);
-      doc.setFont('Helvetica','normal'); doc.setTextColor(60,60,60); doc.text(`${currentLang==='id'?'Bank':'Bank'}: ${bank}`,L+4,boxY+14); doc.text(`${currentLang==='id'?'Rekening':'Account'}: ${acc}`,L+4,boxY+21);
+      doc.setFont('Helvetica','bold'); doc.setFontSize(10); doc.setTextColor(85,67,26);
+      doc.text(currentLang==='id'?'Detail Pembayaran':'Payment Details',L+4,boxY+7);
+      doc.setFont('Helvetica','normal'); doc.setTextColor(60,60,60);
+      doc.text(`${currentLang==='id'?'Bank':'Bank'}: ${bank}`,L+4,boxY+14);
+      doc.text(`${currentLang==='id'?'Rekening':'Account'}: ${acc}`,L+4,boxY+21);
 
       doc.setFillColor(16,16,16); doc.roundedRect(R-86,boxY,68,44,6,6,'F');
       doc.setDrawColor(...gold); doc.roundedRect(R-86,boxY,68,44,6,6,'S');
-      doc.setFont('Helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...gold2); doc.text(currentLang==='id'?'TOTAL':'TOTAL',R-52,boxY+9,{align:'center'});
-      doc.setFont('Helvetica','bold'); doc.setFontSize(18); doc.text(money(total),R-52,boxY+21,{align:'center'});
-      doc.setFont('Helvetica','normal'); doc.setFontSize(8); doc.setTextColor(200,200,200); doc.text(currentLang==='id'?'Sudah termasuk pajak':'Tax included',R-52,boxY+29,{align:'center'});
+      doc.setFont('Helvetica','bold'); doc.setFontSize(11); doc.setTextColor(...gold2);
+      doc.text(currentLang==='id'?'TOTAL':'TOTAL',R-52,boxY+9,{align:'center'});
+      doc.setFont('Helvetica','bold'); doc.setFontSize(18);
+      doc.text(money(total),R-52,boxY+21,{align:'center'});
+      doc.setFont('Helvetica','normal'); doc.setFontSize(8); doc.setTextColor(200,200,200);
+      doc.text(currentLang==='id'?'Sudah termasuk pajak':'Tax included',R-52,boxY+29,{align:'center'});
 
-      if(qrData){
-        doc.setFillColor(255,255,255); doc.roundedRect(R-34,boxY+50,26,26,4,4,'FD');
-        try{doc.addImage(qrData,'PNG',R-32,boxY+52,22,22)}catch(e){}
-        doc.setFont('Helvetica','normal'); doc.setFontSize(8); doc.setTextColor(90,90,90); doc.text(note,R,boxY+79,{align:'right'});
-      }
-
-      doc.setFont('Helvetica','bold'); doc.setTextColor(202,164,93); doc.setFontSize(24); doc.text('PAID',R-8,H-30,{angle:18});
-      doc.setFont('Helvetica','normal'); doc.setFontSize(10); doc.setTextColor(95,95,95); doc.text(currentLang==='id'?'Terima kasih atas kepercayaan Anda.':'Thank you for choosing our services.',L,H-24);
-      doc.setTextColor(70,70,70); doc.text(currentLang==='id'?'Hormat kami,':'Sincerely,',R,H-43,{align:'right'}); doc.line(R-60,H-32,R,H-32); doc.setFont('Times','bold'); doc.text(issuer,R,H-18,{align:'right'});
+      doc.setFont('Helvetica','bold'); doc.setTextColor(202,164,93); doc.setFontSize(24);
+      doc.text('PAID',R-8,H-30,{angle:18});
+      doc.setFont('Helvetica','normal'); doc.setFontSize(10); doc.setTextColor(95,95,95);
+      doc.text(currentLang==='id'?'Terima kasih atas kepercayaan Anda.':'Thank you for choosing our services.',L,H-24);
+      doc.setTextColor(70,70,70);
+      doc.text(currentLang==='id'?'Hormat kami,':'Sincerely,',R,H-43,{align:'right'});
+      doc.line(R-60,H-32,R,H-32);
+      doc.setFont('Times','bold');
+      doc.text(issuer,R,H-18,{align:'right'});
 
       const pages=doc.getNumberOfPages();
       doc.setFont('Helvetica','normal'); doc.setFontSize(9); doc.setTextColor(120,120,120);
-      for(let i=1;i<=pages;i++){ doc.setPage(i); doc.text(`Page ${i} of ${pages}`,W/2,H-8,{align:'center'}); }
+      for(let i=1;i<=pages;i++){
+        doc.setPage(i);
+        doc.text(`Page ${i} of ${pages}`,W/2,H-8,{align:'center'});
+      }
 
-      return { doc, invoiceNumber, recipientEmail, whatsAppNumber, client, companyName, total };
+      return { doc, invoiceNumber, client, companyName, total };
     }
 
     async function generatePDF(){
       try{
         if(!validateInvoiceForm()) return;
-        const result = await buildInvoicePDF();
-        const blob = result.doc.output('blob');
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `invoice-${result.invoiceNumber}.pdf`;
+        const result=await buildInvoicePDF();
+        const blob=result.doc.output('blob');
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');
+        a.href=url;
+        a.download=`invoice-${result.invoiceNumber}.pdf`;
         document.body.appendChild(a);
         a.click();
         a.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        setTimeout(()=>URL.revokeObjectURL(url),1000);
       }catch(err){
         console.error(err);
         alert(currentLang==='id' ? 'Terjadi error saat membuat PDF.' : 'An error occurred while generating PDF.');
@@ -530,12 +871,14 @@
       if(!validateInvoiceForm({needEmail:true})) return;
       setButtonLoading('btnEmail', true, currentLang === 'id' ? 'Mengirim...' : 'Sending...');
       try{
-        const result = await buildInvoicePDF();
-        const pdfBase64 = result.doc.output('datauristring');
+        const result=await buildInvoicePDF();
+        const pdfBase64=result.doc.output('datauristring');
         await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-          to_email: result.recipientEmail,
+          to_email: document.getElementById('recipientEmail').value.trim(),
           subject: `Invoice ${result.invoiceNumber}`,
-          message: currentLang === 'id' ? `Halo ${result.client}, berikut invoice ${result.invoiceNumber}.` : `Hello ${result.client}, here is invoice ${result.invoiceNumber}.`,
+          message: currentLang === 'id'
+            ? `Halo ${result.client}, berikut invoice ${result.invoiceNumber}.`
+            : `Hello ${result.client}, here is invoice ${result.invoiceNumber}.`,
           company_name: result.companyName,
           invoice_number: result.invoiceNumber,
           client_name: result.client,
@@ -554,12 +897,12 @@
       if(!validateInvoiceForm({needWhatsApp:true})) return;
       setButtonLoading('btnWa', true, currentLang === 'id' ? 'Membuka...' : 'Opening...');
       try{
-        const result = await buildInvoicePDF();
-        const phone = normalizePhone(result.whatsAppNumber);
-        const msg = currentLang === 'id'
+        const result=await buildInvoicePDF();
+        const phone=normalizePhone(document.getElementById('whatsAppNumber').value.trim());
+        const msg=currentLang==='id'
           ? `Halo ${result.client}, berikut invoice ${result.invoiceNumber} dari ${result.companyName}.`
           : `Hello ${result.client}, here is invoice ${result.invoiceNumber} from ${result.companyName}.`;
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`,'_blank');
       }finally{
         setButtonLoading('btnWa', false);
       }
