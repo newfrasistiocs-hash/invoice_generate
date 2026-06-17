@@ -13,11 +13,12 @@
       margin: 20px auto;
       border: 1px solid #ddd;
       border-radius: 8px;
-      max-width: 900px;
+      max-width: 1000px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h1 { text-align: center; margin-bottom: 20px; }
     footer { text-align: center; margin-top: 40px; color: #777; }
+    table td, table th { vertical-align: middle; }
   </style>
 </head>
 <body>
@@ -50,25 +51,28 @@
           <input type="text" class="form-control" id="clientName" placeholder="Masukkan nama klien">
         </div>
 
-        <h5>Item</h5>
-        <div class="row mb-3">
-          <div class="col">
-            <label class="form-label">Deskripsi</label>
-            <input type="text" class="form-control" id="itemDesc" placeholder="Contoh: Wedding Photography">
-          </div>
-          <div class="col">
-            <label class="form-label">Qty</label>
-            <input type="number" class="form-control" id="itemQty" value="1">
-          </div>
-          <div class="col">
-            <label class="form-label">Harga</label>
-            <input type="number" class="form-control" id="itemPrice" value="2000">
-          </div>
-          <div class="col">
-            <label class="form-label">Pajak (%)</label>
-            <input type="number" class="form-control" id="itemTax" value="10">
-          </div>
-        </div>
+        <h5>Daftar Item</h5>
+        <table class="table table-bordered" id="itemsTable">
+          <thead class="table-light">
+            <tr>
+              <th>Deskripsi</th>
+              <th>Qty</th>
+              <th>Harga</th>
+              <th>Pajak (%)</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" class="form-control" value="Wedding Photography"></td>
+              <td><input type="number" class="form-control" value="1"></td>
+              <td><input type="number" class="form-control" value="2000"></td>
+              <td><input type="number" class="form-control" value="10"></td>
+              <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-success mb-3" onclick="addRow()">Tambah Item</button>
 
         <div class="mb-3">
           <label for="currency" class="form-label">Mata Uang</label>
@@ -81,7 +85,6 @@
             <option value="CNY">Yuan (CNY)</option>
             <option value="AUD">Australian Dollar (AUD)</option>
             <option value="SGD">Singapore Dollar (SGD)</option>
-            <!-- Bisa ditambahkan semua mata uang sesuai kebutuhan -->
           </select>
         </div>
 
@@ -97,46 +100,44 @@
   <!-- jsPDF untuk generate PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
+    function addRow() {
+      const table = document.getElementById("itemsTable").getElementsByTagName("tbody")[0];
+      const newRow = table.insertRow();
+      newRow.innerHTML = `
+        <td><input type="text" class="form-control" placeholder="Deskripsi"></td>
+        <td><input type="number" class="form-control" value="1"></td>
+        <td><input type="number" class="form-control" value="0"></td>
+        <td><input type="number" class="form-control" value="0"></td>
+        <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+      `;
+    }
+
+    function removeRow(button) {
+      const row = button.closest("tr");
+      row.remove();
+    }
+
     function generatePDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
 
-      // Ambil data form
       const invoiceNumber = document.getElementById("invoiceNumber").value;
       const date = document.getElementById("date").value;
       const dueDate = document.getElementById("dueDate").value;
       const clientName = document.getElementById("clientName").value;
-      const itemDesc = document.getElementById("itemDesc").value;
-      const itemQty = parseFloat(document.getElementById("itemQty").value);
-      const itemPrice = parseFloat(document.getElementById("itemPrice").value);
-      const itemTax = parseFloat(document.getElementById("itemTax").value);
       const currency = document.getElementById("currency").value;
 
-      const subtotal = itemQty * itemPrice;
-      const taxAmount = subtotal * (itemTax / 100);
-      const total = subtotal + taxAmount;
-
-      // Format mata uang
       const formatter = new Intl.NumberFormat('id-ID', {
         style: 'currency',
         currency: currency
       });
 
-      // Tambahkan logo jika ada
-      const logoInput = document.getElementById("logo");
-      if (logoInput.files.length > 0) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          doc.addImage(e.target.result, "PNG", 150, 10, 40, 20);
-          renderInvoice(doc, invoiceNumber, date, dueDate, clientName, itemDesc, itemQty, itemPrice, subtotal, taxAmount, total, formatter);
-        };
-        reader.readAsDataURL(logoInput.files[0]);
-      } else {
-        renderInvoice(doc, invoiceNumber, date, dueDate, clientName, itemDesc, itemQty, itemPrice, subtotal, taxAmount, total, formatter);
-      }
-    }
+      let subtotal = 0;
+      let totalTax = 0;
 
-    function renderInvoice(doc, invoiceNumber, date, dueDate, clientName, itemDesc, itemQty, itemPrice, subtotal, taxAmount, total, formatter) {
+      const rows = document.querySelectorAll("#itemsTable tbody tr");
+      let yPos = 100;
+
       doc.setFontSize(18);
       doc.text("INVOICE", 20, 20);
 
@@ -147,14 +148,29 @@
       doc.text(`Klien: ${clientName}`, 20, 70);
 
       doc.text("Detail Item:", 20, 90);
-      doc.text(`Deskripsi: ${itemDesc}`, 20, 100);
-      doc.text(`Qty: ${itemQty}`, 20, 110);
-      doc.text(`Harga: ${formatter.format(itemPrice)}`, 20, 120);
-      doc.text(`Subtotal: ${formatter.format(subtotal)}`, 20, 130);
-      doc.text(`Pajak: ${formatter.format(taxAmount)}`, 20, 140);
-      doc.text(`Total: ${formatter.format(total)}`, 20, 150);
 
-      doc.text("Terima kasih atas kepercayaan Anda.", 20, 170);
+      rows.forEach(row => {
+        const desc = row.cells[0].querySelector("input").value;
+        const qty = parseFloat(row.cells[1].querySelector("input").value);
+        const price = parseFloat(row.cells[2].querySelector("input").value);
+        const tax = parseFloat(row.cells[3].querySelector("input").value);
+
+        const lineSubtotal = qty * price;
+        const lineTax = lineSubtotal * (tax / 100);
+        subtotal += lineSubtotal;
+        totalTax += lineTax;
+
+        doc.text(`${desc} | Qty: ${qty} | Harga: ${formatter.format(price)} | Subtotal: ${formatter.format(lineSubtotal)} | Pajak: ${formatter.format(lineTax)}`, 20, yPos);
+        yPos += 10;
+      });
+
+      const total = subtotal + totalTax;
+
+      doc.text(`Subtotal: ${formatter.format(subtotal)}`, 20, yPos + 10);
+      doc.text(`Total Pajak: ${formatter.format(totalTax)}`, 20, yPos + 20);
+      doc.text(`Total: ${formatter.format(total)}`, 20, yPos + 30);
+
+      doc.text("Terima kasih atas kepercayaan Anda.", 20, yPos + 50);
 
       doc.save(`invoice-${invoiceNumber}.pdf`);
     }
