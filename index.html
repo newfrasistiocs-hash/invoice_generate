@@ -16,7 +16,6 @@
       --muted:#6d6d6d;
       --line:#eadfca;
     }
-
     body{
       margin:0;
       min-height:100vh;
@@ -27,28 +26,16 @@
       color:#fff;
       font-family:"Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
-
-    .shell{
-      padding:28px 0 42px;
-    }
-
-    .hero{
-      text-align:center;
-      margin-bottom:18px;
-    }
-
+    .shell{ padding:22px 0 42px; }
+    .hero{ text-align:center; margin-bottom:14px; }
     .hero h1{
-      font-family: Georgia, "Times New Roman", serif;
+      font-family:Georgia, "Times New Roman", serif;
       font-weight:800;
       letter-spacing:1px;
       text-shadow:0 3px 18px rgba(0,0,0,.35);
+      margin-bottom:6px;
     }
-
-    .hero p{
-      margin:8px 0 0;
-      color:rgba(255,255,255,.82);
-    }
-
+    .hero p{ margin:0; color:rgba(255,255,255,.82); }
     .invoice-box{
       max-width:1240px;
       margin:0 auto;
@@ -58,119 +45,96 @@
       box-shadow:0 26px 90px rgba(0,0,0,.46);
       border:1px solid rgba(202,164,93,.28);
     }
-
-    .top-strip{
-      height:12px;
-      background:linear-gradient(90deg, #6f541d, var(--gold), var(--gold2), #9f7c2b);
-    }
-
-    .content{
-      padding:28px;
-    }
-
+    .top-strip{ height:12px; background:linear-gradient(90deg, #6f541d, var(--gold), var(--gold2), #9f7c2b); }
+    .content{ padding:24px; }
     .panel-head{
-      display:flex;
-      justify-content:space-between;
-      gap:18px;
-      align-items:flex-start;
-      border-bottom:1px solid #efe6d2;
-      padding-bottom:18px;
-      margin-bottom:22px;
+      display:flex; justify-content:space-between; gap:18px; align-items:flex-start;
+      border-bottom:1px solid #efe6d2; padding-bottom:14px; margin-bottom:18px;
     }
-
-    .panel-head h2{
-      margin:0;
-      font-family: Georgia, "Times New Roman", serif;
-      color:#111;
-      font-weight:800;
-    }
-
+    .panel-head h2{ margin:0; font-family:Georgia, "Times New Roman", serif; color:#111; font-weight:800; }
     .badge-premium{
       background:linear-gradient(135deg, #111, #333);
       color:var(--gold2);
       border:1px solid rgba(202,164,93,.55);
-      padding:8px 14px;
-      border-radius:999px;
-      font-size:12px;
-      letter-spacing:.7px;
-      text-transform:uppercase;
+      padding:8px 14px; border-radius:999px; font-size:12px; letter-spacing:.7px; text-transform:uppercase;
     }
-
+    .action-bar{
+      display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap; margin-bottom:14px;
+    }
+    .menu-btn, .lang-btn{
+      border-radius:12px; border:1px solid #ded6c8; background:#fff; color:#222; padding:10px 14px;
+      font-weight:700;
+    }
+    .menu-panel{
+      display:none; border:1px solid #e8dfcf; border-radius:16px; padding:14px; background:#fff; margin-bottom:16px;
+      box-shadow:0 12px 30px rgba(0,0,0,.06);
+    }
+    .menu-panel.show{ display:block; }
+    .mode-switch .btn{
+      border-radius:12px;
+    }
+    .mode-switch .btn.active{
+      background:linear-gradient(90deg, #1d1d1d, #4a4a4a);
+      color:#fff;
+      border-color:#1d1d1d;
+    }
     .form-label{ font-weight:700; color:#262626; }
     .form-control,.form-select{
-      border-radius:12px;
-      border-color:#ded6c8;
-      box-shadow:none;
+      border-radius:12px; border-color:#ded6c8; box-shadow:none;
     }
     .form-control:focus,.form-select:focus{
-      border-color:var(--gold);
-      box-shadow:0 0 0 .2rem rgba(202,164,93,.14);
+      border-color:var(--gold); box-shadow:0 0 0 .2rem rgba(202,164,93,.14);
     }
-
     .section-title{
-      color:#111;
-      font-weight:800;
-      margin:24px 0 12px;
-      position:relative;
-      padding-left:14px;
+      color:#111; font-weight:800; margin:22px 0 12px; position:relative; padding-left:14px;
     }
     .section-title::before{
-      content:"";
-      position:absolute;
-      left:0; top:4px;
-      width:4px; height:18px;
-      background:linear-gradient(180deg, var(--gold), #8f6b23);
-      border-radius:999px;
+      content:""; position:absolute; left:0; top:4px; width:4px; height:18px;
+      background:linear-gradient(180deg, var(--gold), #8f6b23); border-radius:999px;
     }
-
-    .table-wrap{
-      border-radius:16px;
-      overflow:hidden;
-      border:1px solid #e8dfcf;
-    }
+    .table-wrap{ border-radius:16px; overflow:hidden; border:1px solid #e8dfcf; }
     .table{ margin-bottom:0; }
     .table thead th{
-      background:linear-gradient(90deg, #111, #2a2a2a);
-      color:var(--gold2);
-      border:none;
-      text-align:center;
-      vertical-align:middle;
-      padding:14px 10px;
-      font-weight:700;
+      background:linear-gradient(90deg, #111, #2a2a2a); color:var(--gold2); border:none; text-align:center; padding:14px 10px; font-weight:700;
     }
-    .table tbody td{ vertical-align:middle; background:#fff; }
-
-    .btn-success{
-      background:linear-gradient(90deg, #b89241, #7f6423);
-      border:none;
-      border-radius:12px;
-      font-weight:700;
-      padding:10px 16px;
-    }
-    .btn-primary{
-      background:linear-gradient(90deg, #1d1d1d, #4a4a4a);
-      border:none;
-      border-radius:12px;
-      font-weight:700;
-      padding:10px 16px;
-    }
+    .btn-success{ background:linear-gradient(90deg, #b89241, #7f6423); border:none; border-radius:12px; font-weight:700; padding:10px 16px; }
+    .btn-primary{ background:linear-gradient(90deg, #1d1d1d, #4a4a4a); border:none; border-radius:12px; font-weight:700; padding:10px 16px; }
     .btn-danger{ border-radius:10px; }
-
     .lux-note{
-      margin-top:14px;
-      background:linear-gradient(135deg, #fffaf0, #fffdf7);
-      border:1px solid #eadfca;
-      border-radius:14px;
-      padding:14px 16px;
-      color:#5f532f;
-      font-size:14px;
+      margin-top:14px; background:linear-gradient(135deg, #fffaf0, #fffdf7); border:1px solid #eadfca;
+      border-radius:14px; padding:14px 16px; color:#5f532f; font-size:14px;
     }
-
-    footer{
-      text-align:center;
-      color:rgba(255,255,255,.82);
+    .upgrade-card{
       margin-top:18px;
-      font-size:14px;
+      border-radius:20px;
+      padding:18px;
+      background: linear-gradient(135deg, #151515, #2a2111);
+      border: 1px solid rgba(202,164,93,.35);
+      box-shadow: 0 16px 35px rgba(0,0,0,.16);
+      color:#fff;
+    }
+    .upgrade-card .price{
+      font-size:24px;
+      font-weight:800;
+      color:var(--gold2);
+      letter-spacing:.4px;
+    }
+    .login-row .btn{
+      border-radius:12px;
+      font-weight:700;
+      padding:10px 14px;
+    }
+    .btn-fb{ background:#1877f2; color:#fff; border:none; }
+    .btn-google{ background:#fff; color:#222; border:1px solid #ddd; }
+    .btn-phone{ background:linear-gradient(90deg, #b89241, #7f6423); color:#fff; border:none; }
+    .text-muted-light{ color:rgba(255,255,255,.75); }
+    footer{
+      text-align:center; color:rgba(255,255,255,.82); margin-top:18px; font-size:14px;
+    }
+    .premium-only { display:block; }
+    .free-disabled { pointer-events:none; opacity:.55; }
+    .inline-badge{
+      display:inline-block; padding:4px 10px; border-radius:999px; background:#f4ecdc; color:#7f6423; font-size:12px; font-weight:700;
     }
   </style>
 </head>
@@ -178,91 +142,116 @@
   <div class="shell">
     <div class="container">
       <div class="hero">
-        <h1>Corporate Invoice Generator</h1>
-        <p>Invoice korporat premium dengan tampilan hitam-emas yang elegan</p>
+        <h1 id="uiTitle">Corporate Invoice Generator</h1>
+        <p id="uiSubtitle">Invoice korporat premium dengan tampilan hitam-emas yang elegan</p>
       </div>
 
       <div class="invoice-box">
         <div class="top-strip"></div>
+
         <div class="content">
           <div class="panel-head">
             <div>
-              <h2>Corporate Billing System</h2>
-              <small class="text-muted">Kop surat, QR pembayaran, dan stamp PAID untuk tampilan profesional.</small>
+              <h2 id="uiPanelTitle">Corporate Billing System</h2>
+              <small id="uiPanelSub" class="text-muted">Kop surat, QR pembayaran, dan stamp PAID untuk tampilan profesional.</small>
             </div>
             <div class="badge-premium">Corporate Edition</div>
+          </div>
+
+          <div class="action-bar">
+            <button type="button" class="menu-btn" onclick="toggleMenu()">☰ Action</button>
+            <div class="dropdown">
+              <button class="lang-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="langBtn">Bahasa</button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#" onclick="setLanguage('id')">Indonesia</a></li>
+                <li><a class="dropdown-item" href="#" onclick="setLanguage('en')">English</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="menuPanel" class="menu-panel">
+            <div class="d-flex flex-wrap justify-content-between gap-3 align-items-center">
+              <div>
+                <div class="fw-bold mb-1" id="modeLabel">Pilih Mode</div>
+                <div class="text-muted" id="modeDesc">Free tidak mendukung logo dan QR pembayaran.</div>
+              </div>
+              <div class="btn-group mode-switch" role="group">
+                <button type="button" class="btn btn-outline-dark active" id="freeModeBtn" onclick="setMode('free')">Free</button>
+                <button type="button" class="btn btn-outline-dark" id="premiumModeBtn" onclick="setMode('premium')">Premium</button>
+              </div>
+            </div>
           </div>
 
           <form id="invoiceForm">
             <div class="row g-3 mb-3">
               <div class="col-md-6">
-                <label for="companyName" class="form-label">Nama Perusahaan / Agency</label>
+                <label for="companyName" class="form-label" id="lblCompanyName">Nama Perusahaan / Agency</label>
                 <input type="text" class="form-control" id="companyName" value="Nama Agency Anda">
               </div>
-              <div class="col-md-6">
-                <label for="logo" class="form-label">Logo Perusahaan</label>
+              <div class="col-md-6 premium-only" id="logoWrap">
+                <label for="logo" class="form-label" id="lblLogo">Logo Perusahaan</label>
                 <input type="file" class="form-control" id="logo" accept="image/*">
               </div>
             </div>
 
             <div class="mb-3">
-              <label for="companyAddress" class="form-label">Alamat Perusahaan</label>
+              <label for="companyAddress" class="form-label" id="lblAddress">Alamat Perusahaan</label>
               <textarea class="form-control" id="companyAddress" rows="2" placeholder="Jl. Contoh No. 123, Kota, Negara"></textarea>
             </div>
 
             <div class="row g-3 mb-3">
               <div class="col-md-4">
-                <label for="invoiceNumber" class="form-label">Invoice #</label>
+                <label for="invoiceNumber" class="form-label" id="lblInvoiceNo">Invoice #</label>
                 <input type="text" class="form-control" id="invoiceNumber" value="INV-1001">
               </div>
               <div class="col-md-4">
-                <label for="date" class="form-label">Tanggal</label>
+                <label for="date" class="form-label" id="lblDate">Tanggal</label>
                 <input type="date" class="form-control" id="date">
               </div>
               <div class="col-md-4">
-                <label for="dueDate" class="form-label">Jatuh Tempo</label>
+                <label for="dueDate" class="form-label" id="lblDueDate">Jatuh Tempo</label>
                 <input type="date" class="form-control" id="dueDate">
               </div>
             </div>
 
             <div class="mb-3">
-              <label for="clientName" class="form-label">Nama Klien</label>
+              <label for="clientName" class="form-label" id="lblClient">Nama Klien</label>
               <input type="text" class="form-control" id="clientName" placeholder="Masukkan nama klien">
             </div>
 
             <div class="row g-3 mb-3">
               <div class="col-md-6">
-                <label for="bankName" class="form-label">Nama Bank</label>
+                <label for="bankName" class="form-label" id="lblBank">Nama Bank</label>
                 <input type="text" class="form-control" id="bankName" placeholder="BCA / Mandiri / BNI">
               </div>
               <div class="col-md-6">
-                <label for="accountNumber" class="form-label">Nomor Rekening</label>
+                <label for="accountNumber" class="form-label" id="lblAcc">Nomor Rekening</label>
                 <input type="text" class="form-control" id="accountNumber" placeholder="1234567890">
               </div>
             </div>
 
             <div class="row g-3 mb-3">
-              <div class="col-md-6">
-                <label for="paymentNote" class="form-label">Keterangan Pembayaran / QR Text</label>
+              <div class="col-md-6 premium-only" id="qrNoteWrap">
+                <label for="paymentNote" class="form-label" id="lblPayNote">Keterangan Pembayaran / QR Text</label>
                 <input type="text" class="form-control" id="paymentNote" placeholder="Scan QR untuk pembayaran">
               </div>
               <div class="col-md-6">
-                <label for="issuerName" class="form-label">Nama Pembuat Invoice / TTD</label>
+                <label for="issuerName" class="form-label" id="lblIssuer">Nama Pembuat Invoice / TTD</label>
                 <input type="text" class="form-control" id="issuerName" placeholder="Nama Anda">
               </div>
             </div>
 
-            <h5 class="section-title">Daftar Item</h5>
+            <h5 class="section-title" id="lblItems">Daftar Item</h5>
             <div class="table-wrap">
               <div class="table-responsive">
                 <table class="table table-bordered" id="itemsTable">
                   <thead>
                     <tr>
-                      <th>Deskripsi</th>
-                      <th style="width:110px;">Qty</th>
-                      <th style="width:160px;">Harga</th>
-                      <th style="width:130px;">Pajak (%)</th>
-                      <th style="width:100px;">Aksi</th>
+                      <th id="thDesc">Deskripsi</th>
+                      <th style="width:110px;" id="thQty">Qty</th>
+                      <th style="width:160px;" id="thPrice">Harga</th>
+                      <th style="width:130px;" id="thTax">Pajak (%)</th>
+                      <th style="width:100px;" id="thAction">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -271,7 +260,7 @@
                       <td><input type="number" class="form-control" value="1" min="0"></td>
                       <td><input type="number" class="form-control" value="5000" min="0"></td>
                       <td><input type="number" class="form-control" value="10" min="0"></td>
-                      <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+                      <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)" id="btnRemove">Hapus</button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -279,12 +268,27 @@
             </div>
 
             <div class="d-flex flex-wrap gap-2 mt-3">
-              <button type="button" class="btn btn-success" onclick="addRow()">Tambah Item</button>
-              <button type="button" class="btn btn-primary" onclick="generatePDF()">Download Invoice PDF</button>
+              <button type="button" class="btn btn-success" onclick="addRow()" id="btnAdd">Tambah Item</button>
+              <button type="button" class="btn btn-primary" onclick="generatePDF()" id="btnGenerate">Download Invoice PDF</button>
             </div>
 
-            <div class="lux-note">
-              Gunakan logo transparan dan alamat perusahaan singkat agar hasil PDF terlihat seperti invoice korporat sungguhan.
+            <div class="lux-note" id="noteBox">
+              Gunakan logo transparan dan alamat singkat agar hasil PDF terlihat seperti invoice korporat sungguhan.
+            </div>
+
+            <div class="upgrade-card">
+              <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                <div>
+                  <div class="fw-bold mb-1" id="upgradeTitle">Upgrade Premium</div>
+                  <div class="text-muted-light" id="upgradeDesc">Aktifkan logo, QR pembayaran, dan tampilan invoice lengkap.</div>
+                </div>
+                <div class="price">RP. 10.000/BULAN</div>
+              </div>
+              <div class="login-row d-flex flex-wrap gap-2 mt-3">
+                <button type="button" class="btn btn-fb" onclick="loginAction('fb')">Login FB</button>
+                <button type="button" class="btn btn-google" onclick="loginAction('google')">Login Google</button>
+                <button type="button" class="btn btn-phone" onclick="loginAction('phone')">Login Nomor HP</button>
+              </div>
             </div>
           </form>
         </div>
@@ -299,24 +303,181 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    let currentLang = 'id';
+    let currentMode = 'premium';
+
+    const texts = {
+      id: {
+        title:'Corporate Invoice Generator',
+        subtitle:'Invoice korporat premium dengan tampilan hitam-emas yang elegan',
+        panelTitle:'Corporate Billing System',
+        panelSub:'Kop surat, QR pembayaran, dan stamp PAID untuk tampilan profesional.',
+        modeLabel:'Pilih Mode',
+        modeDesc:'Free tidak mendukung logo dan QR pembayaran.',
+        companyName:'Nama Perusahaan / Agency',
+        logo:'Logo Perusahaan',
+        address:'Alamat Perusahaan',
+        invoiceNo:'Invoice #',
+        date:'Tanggal',
+        dueDate:'Jatuh Tempo',
+        client:'Nama Klien',
+        bank:'Nama Bank',
+        acc:'Nomor Rekening',
+        payNote:'Keterangan Pembayaran / QR Text',
+        issuer:'Nama Pembuat Invoice / TTD',
+        items:'Daftar Item',
+        desc:'Deskripsi',
+        qty:'Qty',
+        price:'Harga',
+        tax:'Pajak (%)',
+        action:'Aksi',
+        remove:'Hapus',
+        add:'Tambah Item',
+        generate:'Download Invoice PDF',
+        note:'Gunakan logo transparan dan alamat singkat agar hasil PDF terlihat seperti invoice korporat sungguhan.',
+        upgradeTitle:'Upgrade Premium',
+        upgradeDesc:'Aktifkan logo, QR pembayaran, dan tampilan invoice lengkap.',
+        langBtn:'Bahasa',
+        free:'Free',
+        premium:'Premium',
+        fb:'Login FB',
+        google:'Login Google',
+        phone:'Login Nomor HP'
+      },
+      en: {
+        title:'Corporate Invoice Generator',
+        subtitle:'Premium black-gold corporate invoice with elegant styling',
+        panelTitle:'Corporate Billing System',
+        panelSub:'Letterhead, payment QR, and PAID stamp for a professional look.',
+        modeLabel:'Choose Mode',
+        modeDesc:'Free mode does not support logo and payment QR.',
+        companyName:'Company / Agency Name',
+        logo:'Company Logo',
+        address:'Company Address',
+        invoiceNo:'Invoice #',
+        date:'Date',
+        dueDate:'Due Date',
+        client:'Client Name',
+        bank:'Bank Name',
+        acc:'Account Number',
+        payNote:'Payment Note / QR Text',
+        issuer:'Issuer Name / Signature',
+        items:'Items',
+        desc:'Description',
+        qty:'Qty',
+        price:'Price',
+        tax:'Tax (%)',
+        action:'Action',
+        remove:'Remove',
+        add:'Add Item',
+        generate:'Download Invoice PDF',
+        note:'Use a transparent logo and short address to keep the PDF looking corporate.',
+        upgradeTitle:'Upgrade Premium',
+        upgradeDesc:'Enable logo, payment QR, and full invoice styling.',
+        langBtn:'Language',
+        free:'Free',
+        premium:'Premium',
+        fb:'Login FB',
+        google:'Login Google',
+        phone:'Login Phone'
+      }
+    };
+
+    function toggleMenu(){
+      document.getElementById('menuPanel').classList.toggle('show');
+    }
+
+    function applyTexts(){
+      const t = texts[currentLang];
+      document.getElementById('uiTitle').innerText = t.title;
+      document.getElementById('uiSubtitle').innerText = t.subtitle;
+      document.getElementById('uiPanelTitle').innerText = t.panelTitle;
+      document.getElementById('uiPanelSub').innerText = t.panelSub;
+      document.getElementById('modeLabel').innerText = t.modeLabel;
+      document.getElementById('modeDesc').innerText = t.modeDesc;
+      document.getElementById('lblCompanyName').innerText = t.companyName;
+      document.getElementById('lblLogo').innerText = t.logo;
+      document.getElementById('lblAddress').innerText = t.address;
+      document.getElementById('lblInvoiceNo').innerText = t.invoiceNo;
+      document.getElementById('lblDate').innerText = t.date;
+      document.getElementById('lblDueDate').innerText = t.dueDate;
+      document.getElementById('lblClient').innerText = t.client;
+      document.getElementById('lblBank').innerText = t.bank;
+      document.getElementById('lblAcc').innerText = t.acc;
+      document.getElementById('lblPayNote').innerText = t.payNote;
+      document.getElementById('lblIssuer').innerText = t.issuer;
+      document.getElementById('lblItems').innerText = t.items;
+      document.getElementById('thDesc').innerText = t.desc;
+      document.getElementById('thQty').innerText = t.qty;
+      document.getElementById('thPrice').innerText = t.price;
+      document.getElementById('thTax').innerText = t.tax;
+      document.getElementById('thAction').innerText = t.action;
+      document.getElementById('btnRemove').innerText = t.remove;
+      document.getElementById('btnAdd').innerText = t.add;
+      document.getElementById('btnGenerate').innerText = t.generate;
+      document.getElementById('noteBox').innerText = t.note;
+      document.getElementById('upgradeTitle').innerText = t.upgradeTitle;
+      document.getElementById('upgradeDesc').innerText = t.upgradeDesc;
+      document.getElementById('langBtn').innerText = t.langBtn;
+      document.getElementById('freeModeBtn').innerText = t.free;
+      document.getElementById('premiumModeBtn').innerText = t.premium;
+      document.querySelector('.btn-fb').innerText = t.fb;
+      document.querySelector('.btn-google').innerText = t.google;
+      document.querySelector('.btn-phone').innerText = t.phone;
+
+      document.documentElement.lang = currentLang === 'id' ? 'id' : 'en';
+      document.getElementById('companyAddress').placeholder = currentLang === 'id' ? 'Jl. Contoh No. 123, Kota, Negara' : 'Street, Number, City, Country';
+      document.getElementById('clientName').placeholder = currentLang === 'id' ? 'Masukkan nama klien' : 'Enter client name';
+      document.getElementById('bankName').placeholder = currentLang === 'id' ? 'BCA / Mandiri / BNI' : 'Bank name';
+      document.getElementById('accountNumber').placeholder = currentLang === 'id' ? '1234567890' : '1234567890';
+      document.getElementById('paymentNote').placeholder = currentLang === 'id' ? 'Scan QR untuk pembayaran' : 'Scan QR for payment';
+      document.getElementById('issuerName').placeholder = currentLang === 'id' ? 'Nama Anda' : 'Your name';
+    }
+
+    function setLanguage(lang){
+      currentLang = lang;
+      applyTexts();
+    }
+
+    function setMode(mode){
+      currentMode = mode;
+      document.getElementById('freeModeBtn').classList.toggle('active', mode === 'free');
+      document.getElementById('premiumModeBtn').classList.toggle('active', mode === 'premium');
+
+      const logoWrap = document.getElementById('logoWrap');
+      const qrWrap = document.getElementById('qrNoteWrap');
+      if(mode === 'free'){
+        logoWrap.classList.add('free-disabled');
+        qrWrap.classList.add('free-disabled');
+      }else{
+        logoWrap.classList.remove('free-disabled');
+        qrWrap.classList.remove('free-disabled');
+      }
+    }
+
+    function loginAction(type){
+      alert('Login ' + type.toUpperCase() + ' belum dihubungkan ke backend.');
+    }
+
     function addRow() {
       const table = document.getElementById('itemsTable').getElementsByTagName('tbody')[0];
       const newRow = table.insertRow();
       newRow.innerHTML = `
-        <td><input type="text" class="form-control" placeholder="Deskripsi"></td>
+        <td><input type="text" class="form-control" placeholder="${currentLang === 'id' ? 'Deskripsi' : 'Description'}"></td>
         <td><input type="number" class="form-control" value="1" min="0"></td>
         <td><input type="number" class="form-control" value="0" min="0"></td>
         <td><input type="number" class="form-control" value="0" min="0"></td>
-        <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">Hapus</button></td>
+        <td><button type="button" class="btn btn-danger btn-sm" onclick="removeRow(this)">${texts[currentLang].remove}</button></td>
       `;
     }
 
     function removeRow(button) {
       const row = button.closest('tr');
       if (document.querySelectorAll('#itemsTable tbody tr').length > 1) row.remove();
-      else alert('Minimal harus ada 1 item.');
+      else alert(currentLang === 'id' ? 'Minimal harus ada 1 item.' : 'At least 1 item is required.');
     }
 
     async function fileToDataURL(file) {
@@ -332,7 +493,7 @@
     function formatDate(dateStr) {
       if (!dateStr) return '-';
       const d = new Date(dateStr + 'T00:00:00');
-      return d.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+      return d.toLocaleDateString(currentLang === 'id' ? 'id-ID' : 'en-US', { year:'numeric', month:'long', day:'numeric' });
     }
 
     function makeQRDataURL(text) {
@@ -357,25 +518,28 @@
       return data;
     }
 
+    function tpdf(keyId, keyEn){
+      return currentLang === 'id' ? keyId : keyEn;
+    }
+
     async function generatePDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF('p', 'mm', 'a4');
 
-      const companyName = document.getElementById('companyName').value.trim() || 'Nama Agency Anda';
-      const companyAddress = document.getElementById('companyAddress').value.trim() || 'Alamat perusahaan';
+      const companyName = document.getElementById('companyName').value.trim() || (currentLang === 'id' ? 'Nama Agency Anda' : 'Your Agency Name');
+      const companyAddress = document.getElementById('companyAddress').value.trim() || (currentLang === 'id' ? 'Alamat perusahaan' : 'Company address');
       const invoiceNumber = document.getElementById('invoiceNumber').value.trim() || 'INV-1001';
       const date = formatDate(document.getElementById('date').value);
       const dueDate = formatDate(document.getElementById('dueDate').value);
       const clientName = document.getElementById('clientName').value.trim() || '-';
-      const currency = 'USD';
       const bankName = document.getElementById('bankName').value.trim() || '-';
       const accountNumber = document.getElementById('accountNumber').value.trim() || '-';
-      const paymentNote = document.getElementById('paymentNote').value.trim() || 'Scan QR untuk pembayaran';
+      const paymentNote = document.getElementById('paymentNote').value.trim() || (currentLang === 'id' ? 'Scan QR untuk pembayaran' : 'Scan QR for payment');
       const issuerName = document.getElementById('issuerName').value.trim() || '-';
-      const logoFile = document.getElementById('logo').files[0];
+      const logoFile = currentMode === 'premium' ? document.getElementById('logo').files[0] : null;
       const logoData = await fileToDataURL(logoFile);
 
-      const formatter = new Intl.NumberFormat('id-ID', { style: 'currency', currency });
+      const formatter = new Intl.NumberFormat(currentLang === 'id' ? 'id-ID' : 'en-US', { style: 'currency', currency: 'USD' });
       const pageWidth = doc.internal.pageSize.getWidth();
       const pageHeight = doc.internal.pageSize.getHeight();
       const leftX = 18;
@@ -401,8 +565,8 @@
       });
 
       const total = subtotal + totalTax;
-      const qrText = `${companyName}\nInvoice ${invoiceNumber}\nBank: ${bankName}\nRekening: ${accountNumber}\nTotal: ${formatter.format(total)}`;
-      const qrData = makeQRDataURL(qrText);
+      const qrText = `${companyName} | ${invoiceNumber} | ${bankName} | ${accountNumber} | ${formatter.format(total)}`;
+      const qrData = currentMode === 'premium' ? makeQRDataURL(qrText) : null;
 
       doc.setFillColor(14, 14, 14);
       doc.rect(0, 0, pageWidth, pageHeight, 'F');
@@ -412,7 +576,6 @@
 
       doc.setFillColor(...dark);
       doc.roundedRect(10, 10, pageWidth - 20, 40, 6, 6, 'F');
-
       doc.setFillColor(...gold);
       doc.rect(10, 50, pageWidth - 20, 1.5, 'F');
 
@@ -427,7 +590,7 @@
       const addressLines = doc.splitTextToSize(companyAddress, 90);
       doc.text(addressLines, leftX, 29);
 
-      if (logoData) {
+      if (currentMode === 'premium' && logoData) {
         try {
           doc.setFillColor(255, 255, 255);
           doc.setDrawColor(...gold);
@@ -439,12 +602,12 @@
       doc.setFont('Helvetica', 'bold');
       doc.setFontSize(11);
       doc.setTextColor(...gold);
-      doc.text(`Invoice #: ${invoiceNumber}`, rightX, 22, { align: 'right' });
+      doc.text(`${tpdf('Invoice #', 'Invoice #')}: ${invoiceNumber}`, rightX, 22, { align: 'right' });
       doc.setFont('Helvetica', 'normal');
       doc.setTextColor(70, 70, 70);
-      doc.text(`Tanggal: ${date}`, rightX, 29, { align: 'right' });
-      doc.text(`Jatuh Tempo: ${dueDate}`, rightX, 36, { align: 'right' });
-      doc.text(`Klien: ${clientName}`, rightX, 43, { align: 'right' });
+      doc.text(`${tpdf('Tanggal', 'Date')}: ${date}`, rightX, 29, { align: 'right' });
+      doc.text(`${tpdf('Jatuh Tempo', 'Due Date')}: ${dueDate}`, rightX, 36, { align: 'right' });
+      doc.text(`${tpdf('Klien', 'Client')}: ${clientName}`, rightX, 43, { align: 'right' });
 
       doc.setFillColor(250, 247, 239);
       doc.setDrawColor(235, 226, 205);
@@ -452,39 +615,23 @@
       doc.setFont('Helvetica', 'bold');
       doc.setFontSize(10);
       doc.setTextColor(85, 67, 26);
-      doc.text('BILL TO', leftX + 3, 64);
+      doc.text(tpdf('BILL TO', 'BILL TO'), leftX + 3, 64);
       doc.setFont('Helvetica', 'normal');
       doc.setTextColor(60, 60, 60);
       doc.text(clientName, leftX + 3, 71);
 
       doc.autoTable({
-        head: [['Deskripsi', 'Qty', 'Harga', 'Subtotal', 'Pajak']],
+        head: [[tpdf('Deskripsi', 'Description'), 'Qty', tpdf('Harga', 'Price'), tpdf('Subtotal', 'Subtotal'), tpdf('Pajak', 'Tax')]],
         body: tableData,
         startY: 90,
         margin: { left: 18, right: 18 },
-        styles: {
-          fontSize: 10,
-          cellPadding: 4,
-          textColor: [35, 35, 35],
-          lineColor: [231, 224, 209],
-          lineWidth: 0.2
-        },
-        headStyles: {
-          fillColor: dark,
-          textColor: gold,
-          halign: 'center',
-          fontStyle: 'bold'
-        },
-        alternateRowStyles: { fillColor: [252, 250, 245] },
-        columnStyles: {
-          1: { halign: 'center' },
-          2: { halign: 'right' },
-          3: { halign: 'right' },
-          4: { halign: 'right' }
-        }
+        styles: { fontSize: 10, cellPadding: 4, textColor: [35,35,35], lineColor: [231,224,209], lineWidth: 0.2 },
+        headStyles: { fillColor: dark, textColor: gold, halign: 'center', fontStyle: 'bold' },
+        alternateRowStyles: { fillColor: [252,250,245] },
+        columnStyles: { 1: { halign: 'center' }, 2: { halign: 'right' }, 3: { halign: 'right' }, 4: { halign: 'right' } }
       });
 
-      const footerY = Math.max(doc.lastAutoTable.finalY + 12, pageHeight - 92);
+      const footerY = Math.max(doc.lastAutoTable.finalY + 12, pageHeight - 94);
 
       doc.setDrawColor(231, 224, 209);
       doc.line(leftX, footerY - 5, rightX, footerY - 5);
@@ -492,54 +639,60 @@
       doc.setFont('Helvetica', 'bold');
       doc.setFontSize(11);
       doc.setTextColor(85, 67, 26);
-      doc.text('Payment Details', leftX, footerY + 1);
+      doc.text(tpdf('Payment Details', 'Payment Details'), leftX, footerY + 1);
 
       doc.setFont('Helvetica', 'normal');
       doc.setTextColor(70, 70, 70);
-      doc.text(`Bank: ${bankName}`, leftX, footerY + 8);
-      doc.text(`Rekening: ${accountNumber}`, leftX, footerY + 15);
+      doc.text(`${tpdf('Bank', 'Bank')}: ${bankName}`, leftX, footerY + 8);
+      doc.text(`${tpdf('Rekening', 'Account')}: ${accountNumber}`, leftX, footerY + 15);
 
       doc.setFont('Helvetica', 'normal');
       doc.setTextColor(70, 70, 70);
-      doc.text(`Subtotal: ${formatter.format(subtotal)}`, rightX, footerY + 2, { align: 'right' });
-      doc.text(`Total Pajak: ${formatter.format(totalTax)}`, rightX, footerY + 9, { align: 'right' });
+      doc.text(`${tpdf('Subtotal', 'Subtotal')}: ${formatter.format(subtotal)}`, rightX, footerY + 2, { align: 'right' });
+      doc.text(`${tpdf('Total Pajak', 'Total Tax')}: ${formatter.format(totalTax)}`, rightX, footerY + 9, { align: 'right' });
 
       doc.setFont('Helvetica', 'bold');
       doc.setFontSize(13);
       doc.setTextColor(...gold);
       doc.text(`TOTAL: ${formatter.format(total)}`, rightX, footerY + 18, { align: 'right' });
 
-      if (qrData) {
+      if (currentMode === 'premium' && qrData) {
         try {
           doc.setDrawColor(...gold);
           doc.setFillColor(255, 255, 255);
-          doc.roundedRect(rightX - 38, footerY + 26, 30, 30, 4, 4, 'FD');
-          doc.addImage(qrData, 'PNG', rightX - 36, footerY + 28, 26, 26);
+          doc.roundedRect(rightX - 40, footerY + 26, 30, 30, 4, 4, 'FD');
+          doc.addImage(qrData, 'PNG', rightX - 38, footerY + 28, 26, 26);
           doc.setFont('Helvetica', 'normal');
           doc.setFontSize(8);
           doc.setTextColor(90, 90, 90);
-          doc.text(paymentNote, rightX - 3, footerY + 59, { align: 'right' });
+          doc.text(paymentNote, rightX, footerY + 61, { align: 'right' });
         } catch (e) {}
       }
 
       doc.setFont('Times', 'italic');
       doc.setFontSize(10);
       doc.setTextColor(95, 95, 95);
-      doc.text('Thank you for choosing our services.', leftX, pageHeight - 24);
+      doc.text(currentLang === 'id' ? 'Terima kasih atas kepercayaan Anda.' : 'Thank you for choosing our services.', leftX, pageHeight - 24);
 
       doc.setFont('Helvetica', 'normal');
       doc.setTextColor(70, 70, 70);
-      doc.text('Hormat kami,', rightX, pageHeight - 43, { align: 'right' });
+      doc.text(currentLang === 'id' ? 'Hormat kami,' : 'Sincerely,', rightX, pageHeight - 43, { align: 'right' });
       doc.line(rightX - 60, pageHeight - 26, rightX, pageHeight - 26);
       doc.setFont('Times', 'bold');
       doc.setFontSize(11);
       doc.text(issuerName, rightX, pageHeight - 18, { align: 'right' });
 
+      if (currentMode === 'premium') {
+        doc.setTextColor(202, 164, 93);
+        doc.setFont('Helvetica', 'bold');
+        doc.setFontSize(24);
+        doc.text('PAID', pageWidth - 55, pageHeight - 30, { angle: 18 });
+      }
+
       const pages = doc.getNumberOfPages();
       doc.setFont('Helvetica', 'normal');
       doc.setFontSize(9);
       doc.setTextColor(120, 120, 120);
-
       for (let i = 1; i <= pages; i++) {
         doc.setPage(i);
         doc.text(`Page ${i} of ${pages}`, pageWidth / 2, pageHeight - 8, { align: 'center' });
@@ -554,6 +707,8 @@
     const due = new Date(today);
     due.setDate(due.getDate() + 7);
     document.getElementById('dueDate').value = due.toISOString().split('T')[0];
+    setMode('premium');
+    applyTexts();
   </script>
 </body>
 </html>
