@@ -70,6 +70,21 @@
           </div>
         </div>
 
+        <div class="mb-3">
+          <label for="currency" class="form-label">Mata Uang</label>
+          <select class="form-select" id="currency">
+            <option value="USD" selected>Dollar (USD)</option>
+            <option value="IDR">Rupiah (IDR)</option>
+            <option value="EUR">Euro (EUR)</option>
+            <option value="GBP">Pound Sterling (GBP)</option>
+            <option value="JPY">Yen (JPY)</option>
+            <option value="CNY">Yuan (CNY)</option>
+            <option value="AUD">Australian Dollar (AUD)</option>
+            <option value="SGD">Singapore Dollar (SGD)</option>
+            <!-- Bisa ditambahkan semua mata uang sesuai kebutuhan -->
+          </select>
+        </div>
+
         <button type="button" class="btn btn-primary" onclick="generatePDF()">Download Invoice PDF</button>
       </form>
     </div>
@@ -95,10 +110,17 @@
       const itemQty = parseFloat(document.getElementById("itemQty").value);
       const itemPrice = parseFloat(document.getElementById("itemPrice").value);
       const itemTax = parseFloat(document.getElementById("itemTax").value);
+      const currency = document.getElementById("currency").value;
 
       const subtotal = itemQty * itemPrice;
       const taxAmount = subtotal * (itemTax / 100);
       const total = subtotal + taxAmount;
+
+      // Format mata uang
+      const formatter = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: currency
+      });
 
       // Tambahkan logo jika ada
       const logoInput = document.getElementById("logo");
@@ -106,15 +128,15 @@
         const reader = new FileReader();
         reader.onload = function(e) {
           doc.addImage(e.target.result, "PNG", 150, 10, 40, 20);
-          renderInvoice(doc, invoiceNumber, date, dueDate, clientName, itemDesc, itemQty, itemPrice, subtotal, taxAmount, total);
+          renderInvoice(doc, invoiceNumber, date, dueDate, clientName, itemDesc, itemQty, itemPrice, subtotal, taxAmount, total, formatter);
         };
         reader.readAsDataURL(logoInput.files[0]);
       } else {
-        renderInvoice(doc, invoiceNumber, date, dueDate, clientName, itemDesc, itemQty, itemPrice, subtotal, taxAmount, total);
+        renderInvoice(doc, invoiceNumber, date, dueDate, clientName, itemDesc, itemQty, itemPrice, subtotal, taxAmount, total, formatter);
       }
     }
 
-    function renderInvoice(doc, invoiceNumber, date, dueDate, clientName, itemDesc, itemQty, itemPrice, subtotal, taxAmount, total) {
+    function renderInvoice(doc, invoiceNumber, date, dueDate, clientName, itemDesc, itemQty, itemPrice, subtotal, taxAmount, total, formatter) {
       doc.setFontSize(18);
       doc.text("INVOICE", 20, 20);
 
@@ -127,10 +149,10 @@
       doc.text("Detail Item:", 20, 90);
       doc.text(`Deskripsi: ${itemDesc}`, 20, 100);
       doc.text(`Qty: ${itemQty}`, 20, 110);
-      doc.text(`Harga: $${itemPrice}`, 20, 120);
-      doc.text(`Subtotal: $${subtotal.toFixed(2)}`, 20, 130);
-      doc.text(`Pajak: $${taxAmount.toFixed(2)}`, 20, 140);
-      doc.text(`Total: $${total.toFixed(2)}`, 20, 150);
+      doc.text(`Harga: ${formatter.format(itemPrice)}`, 20, 120);
+      doc.text(`Subtotal: ${formatter.format(subtotal)}`, 20, 130);
+      doc.text(`Pajak: ${formatter.format(taxAmount)}`, 20, 140);
+      doc.text(`Total: ${formatter.format(total)}`, 20, 150);
 
       doc.text("Terima kasih atas kepercayaan Anda.", 20, 170);
 
