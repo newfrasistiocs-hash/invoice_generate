@@ -8,18 +8,11 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <style>
     :root{
-      --bg1:#080808;
-      --bg2:#171717;
-      --gold:#caa45d;
-      --gold2:#ead49a;
-      --paper:#ffffff;
-      --ink:#1c1c1c;
-      --muted:#6d6d6d;
-      --danger:#dc3545;
+      --bg1:#080808; --bg2:#171717; --gold:#caa45d; --gold2:#ead49a; --paper:#ffffff;
+      --ink:#1c1c1c; --muted:#6d6d6d; --danger:#dc3545;
     }
     body{
-      margin:0;
-      min-height:100vh;
+      margin:0; min-height:100vh;
       background:
         radial-gradient(circle at top left, rgba(202,164,93,.15), transparent 22%),
         radial-gradient(circle at bottom right, rgba(255,255,255,.08), transparent 24%),
@@ -29,21 +22,12 @@
     }
     .shell{ padding:24px 0 42px; }
     .hero{ text-align:center; margin-bottom:16px; }
-    .hero h1{
-      font-family:Georgia, "Times New Roman", serif;
-      font-weight:800;
-      letter-spacing:1px;
-      margin:0 0 6px;
-    }
+    .hero h1{ font-family:Georgia, "Times New Roman", serif; font-weight:800; letter-spacing:1px; margin:0 0 6px; }
     .hero p{ margin:0; color:rgba(255,255,255,.82); }
 
     .invoice-box{
-      max-width:1240px;
-      margin:0 auto;
-      background:rgba(255,255,255,.985);
-      border-radius:28px;
-      overflow:hidden;
-      box-shadow:0 26px 90px rgba(0,0,0,.46);
+      max-width:1240px; margin:0 auto; background:rgba(255,255,255,.985);
+      border-radius:28px; overflow:hidden; box-shadow:0 26px 90px rgba(0,0,0,.46);
       border:1px solid rgba(202,164,93,.28);
     }
     .top-strip{ height:12px; background:linear-gradient(90deg, #6f541d, var(--gold), var(--gold2), #9f7c2b); }
@@ -54,21 +38,14 @@
     }
     .panel-head h2{ margin:0; font-family:Georgia, "Times New Roman", serif; color:#111; font-weight:800; }
     .badge-premium{
-      background:linear-gradient(135deg, #111, #333);
-      color:var(--gold2);
-      border:1px solid rgba(202,164,93,.55);
-      padding:8px 14px; border-radius:999px; font-size:12px; letter-spacing:.7px; text-transform:uppercase;
+      background:linear-gradient(135deg, #111, #333); color:var(--gold2);
+      border:1px solid rgba(202,164,93,.55); padding:8px 14px; border-radius:999px;
+      font-size:12px; letter-spacing:.7px; text-transform:uppercase;
     }
     .form-label{ font-weight:700; color:#262626; }
-    .form-control{
-      border-radius:12px; border-color:#ded6c8; box-shadow:none;
-    }
-    .form-control:focus{
-      border-color:var(--gold); box-shadow:0 0 0 .2rem rgba(202,164,93,.14);
-    }
-    .section-title{
-      color:#111; font-weight:800; margin:22px 0 12px; position:relative; padding-left:14px;
-    }
+    .form-control{ border-radius:12px; border-color:#ded6c8; box-shadow:none; }
+    .form-control:focus{ border-color:var(--gold); box-shadow:0 0 0 .2rem rgba(202,164,93,.14); }
+    .section-title{ color:#111; font-weight:800; margin:22px 0 12px; position:relative; padding-left:14px; }
     .section-title::before{
       content:""; position:absolute; left:0; top:4px; width:4px; height:18px;
       background:linear-gradient(180deg, var(--gold), #8f6b23); border-radius:999px;
@@ -76,78 +53,29 @@
     .table-wrap{ border-radius:16px; overflow:hidden; border:1px solid #e8dfcf; }
     .table{ margin-bottom:0; }
     .table thead th{
-      background:linear-gradient(90deg, #111, #2a2a2a);
-      color:var(--gold2);
-      border:none;
-      text-align:center;
-      padding:14px 10px;
-      font-weight:700;
+      background:linear-gradient(90deg, #111, #2a2a2a); color:var(--gold2); border:none;
+      text-align:center; padding:14px 10px; font-weight:700;
     }
-    .btn-success{
-      background:linear-gradient(90deg, #b89241, #7f6423);
-      border:none;
-      border-radius:12px;
-      font-weight:700;
-      padding:10px 16px;
-    }
-    .btn-primary{
-      background:linear-gradient(90deg, #1d1d1d, #4a4a4a);
-      border:none;
-      border-radius:12px;
-      font-weight:700;
-      padding:10px 16px;
-    }
-    .btn-info{
-      background:linear-gradient(90deg, #0aa3c2, #056f84);
-      border:none;
-      border-radius:12px;
-      font-weight:700;
-      padding:10px 16px;
-      color:#fff;
-    }
+    .btn-success{ background:linear-gradient(90deg, #b89241, #7f6423); border:none; border-radius:12px; font-weight:700; padding:10px 16px; }
+    .btn-primary{ background:linear-gradient(90deg, #1d1d1d, #4a4a4a); border:none; border-radius:12px; font-weight:700; padding:10px 16px; }
+    .btn-info{ background:linear-gradient(90deg, #0aa3c2, #056f84); border:none; border-radius:12px; font-weight:700; padding:10px 16px; color:#fff; }
     .btn-danger{ border-radius:10px; }
     .lux-note{
-      margin-top:14px;
-      background:linear-gradient(135deg, #fffaf0, #fffdf7);
-      border:1px solid #eadfca;
-      border-radius:14px;
-      padding:14px 16px;
-      color:#5f532f;
-      font-size:14px;
+      margin-top:14px; background:linear-gradient(135deg, #fffaf0, #fffdf7); border:1px solid #eadfca;
+      border-radius:14px; padding:14px 16px; color:#5f532f; font-size:14px;
     }
     .upgrade-card{
-      margin-top:18px;
-      border-radius:20px;
-      padding:18px;
+      margin-top:18px; border-radius:20px; padding:18px;
       background: linear-gradient(135deg, #151515, #2a2111);
-      border: 1px solid rgba(202,164,93,.35);
-      box-shadow: 0 16px 35px rgba(0,0,0,.16);
-      color:#fff;
+      border: 1px solid rgba(202,164,93,.35); box-shadow: 0 16px 35px rgba(0,0,0,.16); color:#fff;
     }
-    .upgrade-card .price{
-      font-size:24px;
-      font-weight:800;
-      color:var(--gold2);
-      letter-spacing:.4px;
-    }
-    footer{
-      text-align:center;
-      color:rgba(255,255,255,.82);
-      margin-top:18px;
-      font-size:14px;
-    }
+    .upgrade-card .price{ font-size:24px; font-weight:800; color:var(--gold2); letter-spacing:.4px; }
+    footer{ text-align:center; color:rgba(255,255,255,.82); margin-top:18px; font-size:14px; }
     .mode-switch .btn{ border-radius:12px; }
-    .mode-switch .btn.active{
-      background:linear-gradient(90deg, #1d1d1d, #4a4a4a);
-      color:#fff;
-      border-color:#1d1d1d;
-    }
-    .action-bar{
-      display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap; margin-bottom:14px;
-    }
+    .mode-switch .btn.active{ background:linear-gradient(90deg, #1d1d1d, #4a4a4a); color:#fff; border-color:#1d1d1d; }
+    .action-bar{ display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap; margin-bottom:14px; }
     .menu-btn, .lang-btn{
-      border-radius:12px; border:1px solid #ded6c8; background:#fff; color:#222; padding:10px 14px;
-      font-weight:700;
+      border-radius:12px; border:1px solid #ded6c8; background:#fff; color:#222; padding:10px 14px; font-weight:700;
     }
     .menu-panel{
       display:none; border:1px solid #e8dfcf; border-radius:16px; padding:14px; background:#fff; margin-bottom:16px;
@@ -161,22 +89,13 @@
       box-shadow:0 0 0 .2rem rgba(220,53,69,.15)!important;
       background-color:#fff5f5;
     }
-    .invalid-feedback{
-      display:none;
-      color:var(--danger);
-      font-size:.875rem;
-      margin-top:6px;
-    }
+    .invalid-feedback{ display:none; color:var(--danger); font-size:.875rem; margin-top:6px; }
     .form-control.is-invalid ~ .invalid-feedback{ display:block; }
 
     .shake{ animation:shake .45s ease-in-out; }
     @keyframes shake{
-      0%{transform:translateX(0)}
-      20%{transform:translateX(-6px)}
-      40%{transform:translateX(6px)}
-      60%{transform:translateX(-5px)}
-      80%{transform:translateX(5px)}
-      100%{transform:translateX(0)}
+      0%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)}
+      60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} 100%{transform:translateX(0)}
     }
 
     .item-row-error{ background:rgba(220,53,69,.05); }
@@ -184,30 +103,15 @@
 
     .loading-btn{ pointer-events:none; opacity:.88; }
     .loading-spinner{
-      display:inline-block;
-      width:1rem;
-      height:1rem;
-      margin-right:8px;
-      border:2px solid rgba(255,255,255,.35);
-      border-top-color:#fff;
-      border-radius:50%;
-      animation:spin .8s linear infinite;
-      vertical-align:-2px;
+      display:inline-block; width:1rem; height:1rem; margin-right:8px; border:2px solid rgba(255,255,255,.35);
+      border-top-color:#fff; border-radius:50%; animation:spin .8s linear infinite; vertical-align:-2px;
     }
     @keyframes spin{ to{ transform:rotate(360deg); } }
 
-    .send-icon{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      margin-right:8px;
-      transition:transform .3s ease, opacity .3s ease;
-    }
+    .send-icon{ display:inline-flex; align-items:center; justify-content:center; margin-right:8px; }
     .loading-btn .send-icon{ animation:planeSpin .9s linear infinite; }
     @keyframes planeSpin{
-      0%{transform:rotate(0deg)}
-      50%{transform:rotate(15deg)}
-      100%{transform:rotate(360deg)}
+      0%{transform:rotate(0deg)} 50%{transform:rotate(15deg)} 100%{transform:rotate(360deg)}
     }
 
     .field-hint{ font-size:12px; color:#8c8c8c; margin-top:5px; }
@@ -373,8 +277,7 @@
                 <span id="btnEmailText">Kirim Email</span>
               </button>
               <button type="button" class="btn btn-success" id="btnWa" onclick="shareWhatsAppInvoice()">
-                <i class="bi bi-whatsapp me-1"></i>
-                <span id="btnWaText">Kirim WhatsApp</span>
+                <i class="bi bi-whatsapp me-1"></i><span id="btnWaText">Kirim WhatsApp</span>
               </button>
             </div>
 
@@ -416,13 +319,6 @@
       const x=t[currentLang];
       Object.entries({uiTitle:x.title,uiSubtitle:x.subtitle,uiPanelTitle:x.panelTitle,uiPanelSub:x.panelSub,modeLabel:x.modeLabel,modeDesc:x.modeDesc,lblCompanyName:x.companyName,lblLogo:x.logo,lblAddress:x.address,lblInvoiceNo:x.invoiceNo,lblDate:x.date,lblDueDate:x.dueDate,lblClient:x.client,lblBank:x.bank,lblAcc:x.acc,lblPayNote:x.payNote,lblIssuer:x.issuer,lblEmail:x.email,lblWhatsApp:x.whatsApp,lblItems:x.items,thDesc:x.desc,thQty:x.qty,thPrice:x.price,thTax:x.tax,thAction:x.action,btnRemove:x.remove,btnAdd:x.add,btnDownload:x.generate,btnEmailText:x.emailBtn,btnWaText:x.waBtn,noteBox:x.note,upgradeTitle:x.upgradeTitle,upgradeDesc:x.upgradeDesc,langBtn:x.langBtn,freeModeBtn:x.free,premiumModeBtn:x.premium,luxuryModeBtn:x.luxury}).forEach(([k,v])=>document.getElementById(k).innerText=v);
       document.documentElement.lang=currentLang;
-      document.getElementById('companyAddress').placeholder=currentLang==='id'?'Jl. Contoh No. 123, Kota, Negara':'Street, Number, City, Country';
-      document.getElementById('clientName').placeholder=currentLang==='id'?'Masukkan nama klien':'Enter client name';
-      document.getElementById('bankName').placeholder=currentLang==='id'?'BCA / Mandiri / BNI':'Bank name';
-      document.getElementById('paymentNote').placeholder=currentLang==='id'?'Scan QR untuk pembayaran':'Scan QR for payment';
-      document.getElementById('issuerName').placeholder=currentLang==='id'?'Nama Anda':'Your name';
-      document.getElementById('recipientEmail').placeholder='client@email.com';
-      document.getElementById('whatsAppNumber').placeholder='62812xxxxxxx';
     }
     function setLanguage(lang){currentLang=lang;applyTexts()}
     function setMode(mode){
@@ -451,6 +347,7 @@
     function validateEmail(email){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase())}
     function normalizePhone(phone){return phone.replace(/[^\d]/g,'')}
     function validatePhone(phone){const p=normalizePhone(phone);return p.length>=10&&p.length<=15}
+
     function validateInvoiceForm({needEmail=false,needWhatsApp=false}={}){
       clearAllFieldStates();
       const companyName=document.getElementById('companyName').value.trim();
@@ -509,6 +406,8 @@
 
     async function buildInvoicePDF(){
       const {jsPDF}=window.jspdf;
+      if(!jsPDF) throw new Error('jsPDF library not loaded');
+
       const doc=new jsPDF('p','mm','a4');
       const W=doc.internal.pageSize.getWidth(), H=doc.internal.pageSize.getHeight(), L=18, R=W-18, gold=[202,164,93], dark=[17,17,17];
 
@@ -612,11 +511,18 @@
       try{
         if(!validateInvoiceForm()) return;
         const result = await buildInvoicePDF();
-        if(!result || !result.doc){ alert(currentLang==='id'?'PDF gagal dibuat.':'PDF failed to generate.'); return; }
-        result.doc.save(`invoice-${result.invoiceNumber}.pdf`);
+        const blob = result.doc.output('blob');
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `invoice-${result.invoiceNumber}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
       }catch(err){
         console.error(err);
-        alert(currentLang==='id'?'Terjadi error saat membuat PDF.':'An error occurred while generating PDF.');
+        alert(currentLang==='id' ? 'Terjadi error saat membuat PDF.' : 'An error occurred while generating PDF.');
       }
     }
 
